@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/main.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+
