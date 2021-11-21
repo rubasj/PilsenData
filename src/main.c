@@ -11,7 +11,7 @@
 
 
 
-void load_nodes(const char *file_name) {
+int* load_nodes(const char *file_name) {
     /* Souborovy vstup/vystup */
     FILE *fr;
     char line[LINE_LEN];
@@ -23,7 +23,7 @@ void load_nodes(const char *file_name) {
     nodes = (int*)calloc(DEFAULT_ITEMS_COUNT, sizeof(int));
     if (nodes == NULL) {
         printf("Memory not allocated.\n");
-        return;
+        return NULL;
     }
     curr_length = DEFAULT_ITEMS_COUNT;
 
@@ -34,7 +34,7 @@ void load_nodes(const char *file_name) {
     fr = fopen(file_name, "r");
     if (fr == NULL) {
         printf("No Such File !! ");
-        return;
+        return NULL;
     }
     while (!feof(fr)) {
         fgets(line, LINE_LEN, fr);
@@ -62,14 +62,10 @@ void load_nodes(const char *file_name) {
     if (fclose(fr) == EOF)
     {
         printf("Soubor pro cteni se nepodarilo uzavrit.");
-        return;
+        return NULL;
     }
 
-    int i;
-
-    for (i = 0; i < curr_length; i++) {
-        printf("%d\n", nodes[i]);
-    }
+    return nodes;
 
 }
 
@@ -78,7 +74,8 @@ void load_edges(const char *file_name) {
     /* Souborovy vstup/vystup */
     FILE *fr;
     char line[LINE_LEN];
-    int nodes_count = 0;
+
+
     memset(line, 0, LINE_LEN);
 
     //otevreni souboru
@@ -124,8 +121,21 @@ void load_edges(const char *file_name) {
 int main(int argc, char *argv[]) {
     printf("Hello, World!\n");
 
-    load_nodes("./data/plzen/pilsen_nodes.csv");
-//    load_edges("./data/plzen/pilsen_edges.csv");
+    int *nodes;
+
+    int *edges;
+
+    nodes = load_nodes("./data/plzen/pilsen_nodes.csv");
+
+    if (!nodes) {
+        return EXIT_FAILURE;
+    }
+
+
+
+
+    // uvolneni pameti nodes
+    free(nodes);
 
     return 0;
 }
