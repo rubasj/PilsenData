@@ -3,4 +3,4 @@ project(PilsenData C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(PilsenData src/main.c)
+add_executable(PilsenData src/main.c src/matrix.c src/matrix.h)

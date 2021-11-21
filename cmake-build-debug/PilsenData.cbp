@@ -77,6 +77,12 @@
 		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/main.c">
 			<Option target="PilsenData"/>
 		</Unit>
+		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/matrix.c">
+			<Option target="PilsenData"/>
+		</Unit>
+		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/matrix.h">
+			<Option target="PilsenData"/>
+		</Unit>
 		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

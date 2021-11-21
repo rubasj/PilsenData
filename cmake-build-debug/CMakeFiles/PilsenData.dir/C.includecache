@@ -13,4 +13,14 @@ stdlib.h
 -
 string.h
 -
+matrix.h
+E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/matrix.h
+
+E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/matrix.h
+stdlib.h
+-
+stdio.h
+-
+stddef.h
+-
 
