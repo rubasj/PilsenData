@@ -6,21 +6,25 @@
 
 #IncludeRegexTransform: 
 
-E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/main.c
+E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/edge/edge.h
+string.h
+-
 stdio.h
 -
 stdlib.h
 -
-string.h
--
-matrix.h
-E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/matrix.h
 
-E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/matrix.h
+E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/matrix/matrix.c
+matrix.h
+E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/matrix/matrix.h
+
+E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/matrix/matrix.h
 stdlib.h
 -
 stdio.h
 -
 stddef.h
 -
+../edge/edge.h
+E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/edge/edge.h
 

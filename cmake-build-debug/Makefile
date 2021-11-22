@@ -142,6 +142,33 @@ PilsenData/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/build
 .PHONY : PilsenData/fast
 
+src/edge/edge.obj: src/edge/edge.c.obj
+
+.PHONY : src/edge/edge.obj
+
+# target to build an object file
+src/edge/edge.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/edge/edge.c.obj
+.PHONY : src/edge/edge.c.obj
+
+src/edge/edge.i: src/edge/edge.c.i
+
+.PHONY : src/edge/edge.i
+
+# target to preprocess a source file
+src/edge/edge.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/edge/edge.c.i
+.PHONY : src/edge/edge.c.i
+
+src/edge/edge.s: src/edge/edge.c.s
+
+.PHONY : src/edge/edge.s
+
+# target to generate assembly for a file
+src/edge/edge.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/edge/edge.c.s
+.PHONY : src/edge/edge.c.s
+
 src/main.obj: src/main.c.obj
 
 .PHONY : src/main.obj
@@ -169,32 +196,32 @@ src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/main.c.s
 .PHONY : src/main.c.s
 
-src/matrix.obj: src/matrix.c.obj
+src/matrix/matrix.obj: src/matrix/matrix.c.obj
 
-.PHONY : src/matrix.obj
+.PHONY : src/matrix/matrix.obj
 
 # target to build an object file
-src/matrix.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/matrix.c.obj
-.PHONY : src/matrix.c.obj
+src/matrix/matrix.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj
+.PHONY : src/matrix/matrix.c.obj
 
-src/matrix.i: src/matrix.c.i
+src/matrix/matrix.i: src/matrix/matrix.c.i
 
-.PHONY : src/matrix.i
+.PHONY : src/matrix/matrix.i
 
 # target to preprocess a source file
-src/matrix.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/matrix.c.i
-.PHONY : src/matrix.c.i
+src/matrix/matrix.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/matrix/matrix.c.i
+.PHONY : src/matrix/matrix.c.i
 
-src/matrix.s: src/matrix.c.s
+src/matrix/matrix.s: src/matrix/matrix.c.s
 
-.PHONY : src/matrix.s
+.PHONY : src/matrix/matrix.s
 
 # target to generate assembly for a file
-src/matrix.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/matrix.c.s
-.PHONY : src/matrix.c.s
+src/matrix/matrix.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/matrix/matrix.c.s
+.PHONY : src/matrix/matrix.c.s
 
 # Help Target
 help:
@@ -205,12 +232,15 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... PilsenData
+	@echo ... src/edge/edge.obj
+	@echo ... src/edge/edge.i
+	@echo ... src/edge/edge.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
-	@echo ... src/matrix.obj
-	@echo ... src/matrix.i
-	@echo ... src/matrix.s
+	@echo ... src/matrix/matrix.obj
+	@echo ... src/matrix/matrix.i
+	@echo ... src/matrix/matrix.s
 .PHONY : help
 
 

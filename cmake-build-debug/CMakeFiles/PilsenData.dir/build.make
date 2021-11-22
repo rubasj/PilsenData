@@ -89,34 +89,49 @@ CMakeFiles/PilsenData.dir/src/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/PilsenData.dir/src/main.c.s"
 	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\main.c" -o CMakeFiles\PilsenData.dir\src\main.c.s
 
-CMakeFiles/PilsenData.dir/src/matrix.c.obj: CMakeFiles/PilsenData.dir/flags.make
-CMakeFiles/PilsenData.dir/src/matrix.c.obj: ../src/matrix.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/PilsenData.dir/src/matrix.c.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\PilsenData.dir\src\matrix.c.obj   -c "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\matrix.c"
+CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj: CMakeFiles/PilsenData.dir/flags.make
+CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj: ../src/matrix/matrix.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\PilsenData.dir\src\matrix\matrix.c.obj   -c "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\matrix\matrix.c"
 
-CMakeFiles/PilsenData.dir/src/matrix.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/PilsenData.dir/src/matrix.c.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\matrix.c" > CMakeFiles\PilsenData.dir\src\matrix.c.i
+CMakeFiles/PilsenData.dir/src/matrix/matrix.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/PilsenData.dir/src/matrix/matrix.c.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\matrix\matrix.c" > CMakeFiles\PilsenData.dir\src\matrix\matrix.c.i
 
-CMakeFiles/PilsenData.dir/src/matrix.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/PilsenData.dir/src/matrix.c.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\matrix.c" -o CMakeFiles\PilsenData.dir\src\matrix.c.s
+CMakeFiles/PilsenData.dir/src/matrix/matrix.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/PilsenData.dir/src/matrix/matrix.c.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\matrix\matrix.c" -o CMakeFiles\PilsenData.dir\src\matrix\matrix.c.s
+
+CMakeFiles/PilsenData.dir/src/edge/edge.c.obj: CMakeFiles/PilsenData.dir/flags.make
+CMakeFiles/PilsenData.dir/src/edge/edge.c.obj: ../src/edge/edge.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/PilsenData.dir/src/edge/edge.c.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\PilsenData.dir\src\edge\edge.c.obj   -c "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\edge\edge.c"
+
+CMakeFiles/PilsenData.dir/src/edge/edge.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/PilsenData.dir/src/edge/edge.c.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\edge\edge.c" > CMakeFiles\PilsenData.dir\src\edge\edge.c.i
+
+CMakeFiles/PilsenData.dir/src/edge/edge.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/PilsenData.dir/src/edge/edge.c.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\edge\edge.c" -o CMakeFiles\PilsenData.dir\src\edge\edge.c.s
 
 # Object files for target PilsenData
 PilsenData_OBJECTS = \
 "CMakeFiles/PilsenData.dir/src/main.c.obj" \
-"CMakeFiles/PilsenData.dir/src/matrix.c.obj"
+"CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj" \
+"CMakeFiles/PilsenData.dir/src/edge/edge.c.obj"
 
 # External object files for target PilsenData
 PilsenData_EXTERNAL_OBJECTS =
 
 PilsenData.exe: CMakeFiles/PilsenData.dir/src/main.c.obj
-PilsenData.exe: CMakeFiles/PilsenData.dir/src/matrix.c.obj
+PilsenData.exe: CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj
+PilsenData.exe: CMakeFiles/PilsenData.dir/src/edge/edge.c.obj
 PilsenData.exe: CMakeFiles/PilsenData.dir/build.make
 PilsenData.exe: CMakeFiles/PilsenData.dir/linklibs.rsp
 PilsenData.exe: CMakeFiles/PilsenData.dir/objects1.rsp
 PilsenData.exe: CMakeFiles/PilsenData.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable PilsenData.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable PilsenData.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\PilsenData.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

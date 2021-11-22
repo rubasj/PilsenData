@@ -1,17 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "matrix.h"
+#include "matrix/matrix.h"
+#include "edge/edge.h"
 
 /* Predpokladana delka radky */
-#define LINE_LEN 256
+#define LINE_LEN 8192
 #define DELIMITER ","
 #define DEFAULT_ITEMS_COUNT 4
+#define IS_VALID "True"
 
 
 
 
-int* load_nodes(const char *file_name) {
+int* load_nodes(const char *file_name, int *nodes_count) {
     /* Souborovy vstup/vystup */
     FILE *fr;
     char line[LINE_LEN];
@@ -19,6 +21,9 @@ int* load_nodes(const char *file_name) {
     int *nodes;
     /* aktualni delka pole nodes*/
     int curr_length;
+
+    if (!file_name)
+        return NULL;
 
     nodes = (int*)calloc(DEFAULT_ITEMS_COUNT, sizeof(int));
     if (nodes == NULL) {
@@ -47,10 +52,14 @@ int* load_nodes(const char *file_name) {
 
                 if (tmp < curr_length){
                     nodes[tmp] = tmp;
-                    //printf("%d\n",nodes[tmp]);
+
                 } else {
-                    curr_length = tmp +1;
+
                     nodes = realloc(nodes, (tmp+1) * sizeof(int));
+                    for (int i = curr_length; i <= tmp; i++) {
+                        nodes[i] = 0;
+                    }
+                    curr_length = tmp +1;
                     nodes[tmp] = tmp;
                 }
             }
@@ -65,16 +74,19 @@ int* load_nodes(const char *file_name) {
         return NULL;
     }
 
+    *nodes_count = curr_length;
+
     return nodes;
 
 }
 
 
-void load_edges(const char *file_name) {
+edge * load_edges(const char *file_name) {
     /* Souborovy vstup/vystup */
     FILE *fr;
     char line[LINE_LEN];
 
+    edge *temps;
 
     memset(line, 0, LINE_LEN);
 
@@ -82,30 +94,18 @@ void load_edges(const char *file_name) {
     fr = fopen(file_name, "r");
     if (fr == NULL) {
         printf("No Such File !! ");
-        return;
+        return NULL;
     }
-
 
     while (!feof(fr)) {
         fgets(line, LINE_LEN, fr);
         // pokud line obsahuje "id", automaticky se rozumi, ze jde o prvni radku, rovnou se preskoci
-        if (strstr(line, "id") == NULL != 0) {
-
+        if (strstr(line, "id,source") == NULL) {
 //            printf("%s\n", line);
-            int tmp = 0;
-            char *token = strtok(line, DELIMITER);
-            // loop through the string to extract all other tokens
-            while (token != NULL) {
-                tmp++;
-                printf("%s ", token);
 
-                token = strtok(NULL, DELIMITER);
+            edge_add(&temps, line);
 
-                if (tmp == 3)
-                    break;
-            }
-            printf("\n");
-
+            //TODO doresit valid/invalid
         }
         memset(line, 0, LINE_LEN);
     }
@@ -113,29 +113,52 @@ void load_edges(const char *file_name) {
     if (fclose(fr) == EOF)
     {
         printf("Soubor pro cteni se nepodarilo uzavrit.");
-        return;
+        return NULL;
     }
+
+    return temps;
 }
 
 
 int main(int argc, char *argv[]) {
-    printf("Hello, World!\n");
 
-    int *nodes;
 
-    int *edges;
+    int *nodes = NULL;
+    int nodes_count;
+    edge *list_edges = NULL;
+    matrix *m_capacities = NULL;
+    matrix *m_edges = NULL;
 
-    nodes = load_nodes("./data/plzen/pilsen_nodes.csv");
 
+    nodes_count = 0;
+    nodes = load_nodes("./data/plzen/pilsen_nodes.csv", &nodes_count);
+//    nodes = load_nodes("./data/example/example_nodes.csv", &nodes_count);
+//    for (int i = 0; i < 5001; i++)
+//        printf("%d\n", nodes[i]);
     if (!nodes) {
-        return EXIT_FAILURE;
+        printf("Invalid vertex file.\n");
+        return 1;
     }
 
 
+    list_edges = load_edges("./data/plzen/pilsen_edges.csv");
+//    list_edges = load_edges("./data/example/example_edges.csv");
 
+    if (!list_edges) {
+        printf("Invalid edges file.\n");
+        return 6;
+    }
+    m_edges = matrix_create(nodes_count, nodes_count, 0);
+    m_capacities = matrix_create(nodes_count, nodes_count, 0);
 
+    matrix_fill_edges(m_capacities, m_edges, list_edges);
     // uvolneni pameti nodes
     free(nodes);
+    // uvolneni pameti edges
+    edge_free(&list_edges);
+
+    matrix_free(&m_edges);
+    matrix_free(&m_capacities);
 
     return 0;
 }

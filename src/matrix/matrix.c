@@ -52,14 +52,27 @@ void matrix_free(matrix **poor) {
     *poor = NULL;
 }
 
-mat_num_t matrix_get(const matrix *mat, const size_t row, const size_t col) {
-    return mat->items[row * mat->cols + col];
-}
 
 void matrix_set(matrix *mat, const size_t row, const size_t col, mat_num_t val) {
-    if (!mat || !mat->items) {
+    if (!mat || !mat->items || !row || !col || !val) {
         return;
     }
 
     mat->items[row * mat->cols + col] = val;
+}
+
+void matrix_fill_edges( matrix *mat_cap, matrix *mat_id, const edge *list) {
+
+    if (!mat_cap || !mat_id || !list) {
+        return;
+    }
+
+    while (list) {
+        printf("%d - %d\n", list->id, list->capacity);
+        matrix_set(mat_cap, list->source, list->target, list->capacity);
+        matrix_set(mat_id, list->source, list->target, list->id);
+        list = list->next;
+    }
+
+
 }

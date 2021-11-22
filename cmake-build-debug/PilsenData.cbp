@@ -74,13 +74,19 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/edge/edge.c">
+			<Option target="PilsenData"/>
+		</Unit>
+		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/edge/edge.h">
+			<Option target="PilsenData"/>
+		</Unit>
 		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/main.c">
 			<Option target="PilsenData"/>
 		</Unit>
-		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/matrix.c">
+		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/matrix/matrix.c">
 			<Option target="PilsenData"/>
 		</Unit>
-		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/matrix.h">
+		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/matrix/matrix.h">
 			<Option target="PilsenData"/>
 		</Unit>
 		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/CMakeLists.txt">
