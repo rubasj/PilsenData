@@ -57,22 +57,24 @@ void matrix_set(matrix *mat, const size_t row, const size_t col, mat_num_t val) 
     if (!mat || !mat->items || !row || !col || !val) {
         return;
     }
+//    printf("%d - %d\n", val, val);
 
     mat->items[row * mat->cols + col] = val;
+//    printf("%d\n",  mat->items[row * mat->cols + col]);
+
 }
 
 void matrix_fill_edges( matrix *mat_cap, matrix *mat_id, const edge *list) {
 
-    if (!mat_cap || !mat_id || !list) {
-        return;
-    }
-
-    while (list) {
-        printf("%d - %d\n", list->id, list->capacity);
-        matrix_set(mat_cap, list->source, list->target, list->capacity);
-        matrix_set(mat_id, list->source, list->target, list->id);
-        list = list->next;
-    }
+//    if (!mat_cap || !mat_id || !list) {
+//        return;
+//    }
+//
+//    while (list) {
+////        printf("%d - %d\n", list->id, list->capacity);
+//        matrix_set(mat_cap, list->source, list->target, list->capacity);
+//        matrix_set(mat_id, list->source, list->target, list->id);
+//    }
 
 
 }

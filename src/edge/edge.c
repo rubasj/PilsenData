@@ -9,23 +9,23 @@
 
 //TODO create check duplicit id
 
-int *edge_add(edge **list, char *line) {
+edge *edge_create(const char *line) {
     edge *temp = NULL;
     char *token;
 
-    if (!list || !line) {
+    if (!line) {
         return NULL;
     }
-//    printf("%s\n\n", line);
+//    printf(line);
     temp = (edge *) malloc(sizeof(edge));
 
     temp->description = line;
     token = strtok(line, DELIM);
 
-    int inc = 0;
+    int idx = 0;
     while (token != NULL)
     {
-        switch (inc) {
+        switch (idx) {
             case 0:
                 temp->id = atoi(token);
 //                printf("%d\n", temp->id);
@@ -49,33 +49,35 @@ int *edge_add(edge **list, char *line) {
                 break;
         }
 
-        if (inc == 3){
+        if (idx == 3){
             break;
 
         }
 
-        inc++;
+        idx++;
         token = strtok(NULL, DELIM);
     }
 
-//    printf("id: %d, src: %d, tar: %d, cap: %d\n", temp->id, temp->source, temp->target, temp->capacity);
-    temp->next = *list;
-    *list = temp;
+    printf("id: %d, src: %d, tar: %d, cap: %d\n", temp->id, temp->source, temp->target, temp->capacity);
 
     return EXIT_SUCCESS;
 }
 
-
-void edge_free(edge **head){
-    edge *temp = *head;
-
-    while (*head) {
-        temp = (*head)->next;
-
-        free(*head);
-        *head = temp;
+void edge_destroy(edge **poor){
+    if (!poor || !*poor) {
+        return;
     }
 
+    free((*poor)->description);
+    (*poor)->description = NULL;
+
+    (*poor)->id = 0;
+    (*poor)->target = 0;
+    (*poor)->source = 0;
+    (*poor)->capacity = 0;
+
+    free(*poor);
+    *poor = NULL;
 }
 
 

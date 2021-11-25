@@ -15,21 +15,19 @@ typedef struct edge_{
     int target;
     int capacity;
     char *description;
-    struct edge_ *next; /* spojovaci prvek seznamu */
 } edge;
 
 /**
  * Pridani dalsi hrany
- * @param list  seznam, do ktereho se prida nova hrana.
  * @param line  radka ze souboru pro generovani nove hrany
  */
-int *edge_add(edge **list, char *line);
+edge *edge_create(const char *line);
 
 /**
  * Uvolneni seznamu vrcholu
  * @param head seznam vrcholu
  */
-void edge_free(edge **head);
+void edge_destroy(edge **poor);
 
 
 #endif //PILSENDATA_EDGE_H

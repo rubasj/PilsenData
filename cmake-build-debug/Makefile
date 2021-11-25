@@ -169,32 +169,32 @@ src/edge/edge.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/edge/edge.c.s
 .PHONY : src/edge/edge.c.s
 
-src/main.obj: src/main.c.obj
+src/loader.obj: src/loader.c.obj
 
-.PHONY : src/main.obj
+.PHONY : src/loader.obj
 
 # target to build an object file
-src/main.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/main.c.obj
-.PHONY : src/main.c.obj
+src/loader.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/loader.c.obj
+.PHONY : src/loader.c.obj
 
-src/main.i: src/main.c.i
+src/loader.i: src/loader.c.i
 
-.PHONY : src/main.i
+.PHONY : src/loader.i
 
 # target to preprocess a source file
-src/main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/main.c.i
-.PHONY : src/main.c.i
+src/loader.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/loader.c.i
+.PHONY : src/loader.c.i
 
-src/main.s: src/main.c.s
+src/loader.s: src/loader.c.s
 
-.PHONY : src/main.s
+.PHONY : src/loader.s
 
 # target to generate assembly for a file
-src/main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/main.c.s
-.PHONY : src/main.c.s
+src/loader.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/loader.c.s
+.PHONY : src/loader.c.s
 
 src/matrix/matrix.obj: src/matrix/matrix.c.obj
 
@@ -223,6 +223,33 @@ src/matrix/matrix.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/matrix/matrix.c.s
 .PHONY : src/matrix/matrix.c.s
 
+src/vector/vector.obj: src/vector/vector.c.obj
+
+.PHONY : src/vector/vector.obj
+
+# target to build an object file
+src/vector/vector.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/vector/vector.c.obj
+.PHONY : src/vector/vector.c.obj
+
+src/vector/vector.i: src/vector/vector.c.i
+
+.PHONY : src/vector/vector.i
+
+# target to preprocess a source file
+src/vector/vector.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/vector/vector.c.i
+.PHONY : src/vector/vector.c.i
+
+src/vector/vector.s: src/vector/vector.c.s
+
+.PHONY : src/vector/vector.s
+
+# target to generate assembly for a file
+src/vector/vector.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/vector/vector.c.s
+.PHONY : src/vector/vector.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -235,12 +262,15 @@ help:
 	@echo ... src/edge/edge.obj
 	@echo ... src/edge/edge.i
 	@echo ... src/edge/edge.s
-	@echo ... src/main.obj
-	@echo ... src/main.i
-	@echo ... src/main.s
+	@echo ... src/loader.obj
+	@echo ... src/loader.i
+	@echo ... src/loader.s
 	@echo ... src/matrix/matrix.obj
 	@echo ... src/matrix/matrix.i
 	@echo ... src/matrix/matrix.s
+	@echo ... src/vector/vector.obj
+	@echo ... src/vector/vector.i
+	@echo ... src/vector/vector.s
 .PHONY : help
 
 
