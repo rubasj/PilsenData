@@ -21,7 +21,7 @@ typedef struct edge_{
  * Pridani dalsi hrany
  * @param line  radka ze souboru pro generovani nove hrany
  */
-edge *edge_create(const char *line);
+edge *edge_create(char *line);
 
 /**
  * Uvolneni seznamu vrcholu

@@ -9,18 +9,23 @@
 
 //TODO create check duplicit id
 
-edge *edge_create(const char *line) {
+edge *edge_create(char *line) {
+//    printf("%s \n", line);
     edge *temp = NULL;
     char *token;
+    char *tmp_line;
 
     if (!line) {
         return NULL;
     }
 //    printf(line);
     temp = (edge *) malloc(sizeof(edge));
-
+    if (!temp) {
+        return NULL;
+    }
     temp->description = line;
-    token = strtok(line, DELIM);
+    tmp_line = line;
+    token = strtok(tmp_line, DELIM);
 
     int idx = 0;
     while (token != NULL)
@@ -58,9 +63,8 @@ edge *edge_create(const char *line) {
         token = strtok(NULL, DELIM);
     }
 
-    printf("id: %d, src: %d, tar: %d, cap: %d\n", temp->id, temp->source, temp->target, temp->capacity);
 
-    return EXIT_SUCCESS;
+    return temp;
 }
 
 void edge_destroy(edge **poor){

@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <stddef.h>
 #include "../edge/edge.h"
+#include "../vector/vector.h"
+
 /**< Definice typu pro položky obsažené v matici. */
 typedef int mat_num_t;
 
@@ -56,6 +58,6 @@ void matrix_free(matrix **poor);
 void matrix_set(matrix *mat, const size_t row, const size_t col, mat_num_t val);
 
 
-void matrix_fill_edges(matrix *mat_cap, matrix *mat_id, const edge *list);
+void matrix_fill_edges( matrix *mat_cap, matrix *mat_id, const vector_t *nodes, const vector_t *edges);
 
 #endif //PILSENDATA_MATRIX_H
