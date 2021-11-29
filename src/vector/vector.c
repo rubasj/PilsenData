@@ -140,3 +140,5 @@ int vector_isempty(const vector_t *v)  {
 size_t vector_count(const vector_t *v) {
     return v ? v->count : 0;
 }
+
+

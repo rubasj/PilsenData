@@ -12,6 +12,10 @@ CMakeFiles/PilsenData.dir/src/loader.c.obj: ../src/vector/vector.h
 CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj: ../src/edge/edge.h
 CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj: ../src/matrix/matrix.c
 CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj: ../src/matrix/matrix.h
+CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj: ../src/vector/vector.h
+
+CMakeFiles/PilsenData.dir/src/queue/queue.c.obj: ../src/queue/queue.c
+CMakeFiles/PilsenData.dir/src/queue/queue.c.obj: ../src/queue/queue.h
 
 CMakeFiles/PilsenData.dir/src/vector/vector.c.obj: ../src/vector/vector.c
 CMakeFiles/PilsenData.dir/src/vector/vector.c.obj: ../src/vector/vector.h

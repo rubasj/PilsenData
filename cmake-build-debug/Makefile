@@ -223,6 +223,33 @@ src/matrix/matrix.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/matrix/matrix.c.s
 .PHONY : src/matrix/matrix.c.s
 
+src/queue/queue.obj: src/queue/queue.c.obj
+
+.PHONY : src/queue/queue.obj
+
+# target to build an object file
+src/queue/queue.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/queue/queue.c.obj
+.PHONY : src/queue/queue.c.obj
+
+src/queue/queue.i: src/queue/queue.c.i
+
+.PHONY : src/queue/queue.i
+
+# target to preprocess a source file
+src/queue/queue.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/queue/queue.c.i
+.PHONY : src/queue/queue.c.i
+
+src/queue/queue.s: src/queue/queue.c.s
+
+.PHONY : src/queue/queue.s
+
+# target to generate assembly for a file
+src/queue/queue.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/queue/queue.c.s
+.PHONY : src/queue/queue.c.s
+
 src/vector/vector.obj: src/vector/vector.c.obj
 
 .PHONY : src/vector/vector.obj
@@ -268,6 +295,9 @@ help:
 	@echo ... src/matrix/matrix.obj
 	@echo ... src/matrix/matrix.i
 	@echo ... src/matrix/matrix.s
+	@echo ... src/queue/queue.obj
+	@echo ... src/queue/queue.i
+	@echo ... src/queue/queue.s
 	@echo ... src/vector/vector.obj
 	@echo ... src/vector/vector.i
 	@echo ... src/vector/vector.s

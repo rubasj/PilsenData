@@ -53,11 +53,19 @@ void matrix_free(matrix **poor);
  * \param mat Ukazatel na matici, jejíž prvek bude nastavován.
  * \param row Řádek matice.
  * \param col Sloupec matice.
- * \param val Nová hodnotu prvku na daných souřadnicích.
+ * \param val Nová hodnota prvku na daných souřadnicích.
  */
 void matrix_set(matrix *mat, const size_t row, const size_t col, mat_num_t val);
 
 
 void matrix_fill_edges( matrix *mat_cap, matrix *mat_id, const vector_t *nodes, const vector_t *edges);
 
+
+int get_node_position(const vector_t *nodes, const int id_node);
+
+
+void matrix_print(matrix *m);
 #endif //PILSENDATA_MATRIX_H
+
+
+

@@ -149,7 +149,7 @@ vector_t * load_edges(const char *file_name, const int isValid) {
             }
             if (check_vector_edge_duplicates(temps, e->id) == 0) {
                 vector_push_back(temps, &e);
-                    printf("id: %d, src: %d, tar: %d, cap: %d\n", e->id, e->source, e->target, e->capacity);
+//                    printf("id: %d, src: %d, tar: %d, cap: %d\n", e->id, e->source, e->target, e->capacity);
 
             }
 
@@ -188,20 +188,20 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-//    list_edges = load_edges("./data/plzen/pilsen_edges.csv");
+//    list_edges = load_edges("./data/plzen/pilsen_edges.csv", 0);
     list_edges = load_edges("./data/example/example_edges.csv", 0);
 
-    for (int i = 0; i < list_edges->count; ++i) {
-        printf("id: %d, src: %d, tar: %d\n", (*(edge **)vector_at(list_edges, i))->id, (*(edge **)vector_at(list_edges, i))->source, (*(edge **)vector_at(list_edges, i))->target);
-    }
+//    for (int i = 0; i < list_edges->count; ++i) {
+//        printf("id: %d, src: %d, tar: %d\n", (*(edge **)vector_at(list_edges, i))->id, (*(edge **)vector_at(list_edges, i))->source, (*(edge **)vector_at(list_edges, i))->target);
+//    }
     if (!list_edges) {
         printf("Invalid edges file.\n"); //TODO check
         return 6;
     }
-    m_edges = matrix_create(vector_count(list_nodes), vector_count(list_nodes), 0);
-    m_capacities = matrix_create(vector_count(list_edges), vector_count(list_edges), 0);
+    m_edges = matrix_create(vector_count(list_nodes), vector_count(list_nodes), -1);
+    m_capacities = matrix_create(vector_count(list_nodes), vector_count(list_nodes), 0);
 
-    if (!m_capacities, !m_edges) {
+    if (!m_capacities || !m_edges) {
         printf("Matrix not created");
         return -1;
     }
