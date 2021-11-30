@@ -169,6 +169,33 @@ src/edge/edge.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/edge/edge.c.s
 .PHONY : src/edge/edge.c.s
 
+src/ford_fulkerson/ford_fulkerson.obj: src/ford_fulkerson/ford_fulkerson.c.obj
+
+.PHONY : src/ford_fulkerson/ford_fulkerson.obj
+
+# target to build an object file
+src/ford_fulkerson/ford_fulkerson.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.obj
+.PHONY : src/ford_fulkerson/ford_fulkerson.c.obj
+
+src/ford_fulkerson/ford_fulkerson.i: src/ford_fulkerson/ford_fulkerson.c.i
+
+.PHONY : src/ford_fulkerson/ford_fulkerson.i
+
+# target to preprocess a source file
+src/ford_fulkerson/ford_fulkerson.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.i
+.PHONY : src/ford_fulkerson/ford_fulkerson.c.i
+
+src/ford_fulkerson/ford_fulkerson.s: src/ford_fulkerson/ford_fulkerson.c.s
+
+.PHONY : src/ford_fulkerson/ford_fulkerson.s
+
+# target to generate assembly for a file
+src/ford_fulkerson/ford_fulkerson.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.s
+.PHONY : src/ford_fulkerson/ford_fulkerson.c.s
+
 src/loader.obj: src/loader.c.obj
 
 .PHONY : src/loader.obj
@@ -223,33 +250,6 @@ src/matrix/matrix.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/matrix/matrix.c.s
 .PHONY : src/matrix/matrix.c.s
 
-src/queue/queue.obj: src/queue/queue.c.obj
-
-.PHONY : src/queue/queue.obj
-
-# target to build an object file
-src/queue/queue.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/queue/queue.c.obj
-.PHONY : src/queue/queue.c.obj
-
-src/queue/queue.i: src/queue/queue.c.i
-
-.PHONY : src/queue/queue.i
-
-# target to preprocess a source file
-src/queue/queue.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/queue/queue.c.i
-.PHONY : src/queue/queue.c.i
-
-src/queue/queue.s: src/queue/queue.c.s
-
-.PHONY : src/queue/queue.s
-
-# target to generate assembly for a file
-src/queue/queue.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/queue/queue.c.s
-.PHONY : src/queue/queue.c.s
-
 src/vector/vector.obj: src/vector/vector.c.obj
 
 .PHONY : src/vector/vector.obj
@@ -289,15 +289,15 @@ help:
 	@echo ... src/edge/edge.obj
 	@echo ... src/edge/edge.i
 	@echo ... src/edge/edge.s
+	@echo ... src/ford_fulkerson/ford_fulkerson.obj
+	@echo ... src/ford_fulkerson/ford_fulkerson.i
+	@echo ... src/ford_fulkerson/ford_fulkerson.s
 	@echo ... src/loader.obj
 	@echo ... src/loader.i
 	@echo ... src/loader.s
 	@echo ... src/matrix/matrix.obj
 	@echo ... src/matrix/matrix.i
 	@echo ... src/matrix/matrix.s
-	@echo ... src/queue/queue.obj
-	@echo ... src/queue/queue.i
-	@echo ... src/queue/queue.s
 	@echo ... src/vector/vector.obj
 	@echo ... src/vector/vector.i
 	@echo ... src/vector/vector.s

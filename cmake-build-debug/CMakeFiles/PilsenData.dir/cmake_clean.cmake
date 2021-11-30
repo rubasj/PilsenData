@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/PilsenData.dir/src/edge/edge.c.obj"
+  "CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.obj"
   "CMakeFiles/PilsenData.dir/src/loader.c.obj"
   "CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj"
-  "CMakeFiles/PilsenData.dir/src/queue/queue.c.obj"
   "CMakeFiles/PilsenData.dir/src/vector/vector.c.obj"
   "PilsenData.exe"
   "PilsenData.exe.manifest"

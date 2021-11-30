@@ -4,6 +4,12 @@
 CMakeFiles/PilsenData.dir/src/edge/edge.c.obj: ../src/edge/edge.c
 CMakeFiles/PilsenData.dir/src/edge/edge.c.obj: ../src/edge/edge.h
 
+CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.obj: ../src/edge/edge.h
+CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.obj: ../src/ford_fulkerson/ford_fulkerson.c
+CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.obj: ../src/ford_fulkerson/ford_fulkerson.h
+CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.obj: ../src/matrix/matrix.h
+CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.obj: ../src/vector/vector.h
+
 CMakeFiles/PilsenData.dir/src/loader.c.obj: ../src/edge/edge.h
 CMakeFiles/PilsenData.dir/src/loader.c.obj: ../src/loader.c
 CMakeFiles/PilsenData.dir/src/loader.c.obj: ../src/matrix/matrix.h
@@ -13,9 +19,6 @@ CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj: ../src/edge/edge.h
 CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj: ../src/matrix/matrix.c
 CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj: ../src/matrix/matrix.h
 CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj: ../src/vector/vector.h
-
-CMakeFiles/PilsenData.dir/src/queue/queue.c.obj: ../src/queue/queue.c
-CMakeFiles/PilsenData.dir/src/queue/queue.c.obj: ../src/queue/queue.h
 
 CMakeFiles/PilsenData.dir/src/vector/vector.c.obj: ../src/vector/vector.c
 CMakeFiles/PilsenData.dir/src/vector/vector.c.obj: ../src/vector/vector.h
