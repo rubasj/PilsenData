@@ -26,7 +26,7 @@ int bfs(matrix *rGraph, const int s, const int t, int parent[]){
         q.pop();
 
         for (int v = 0; v < rGraph->cols; v++) {
-            if (visited[v] == 0 && rGraph[u][v] > 0) {
+            if (visited[v] == 0 && matrix_get_item(rGraph, u, v) > 0) {
                 // If we find a connection to the sink node,
                 // then there is no point in BFS anymore We
                 // just have to set its parent and can return
@@ -75,15 +75,18 @@ int ford_fulkerson(matrix *graph, int s, int t){
         int path_flow = INT_MAX;
         for (v = t; v != s; v = parent[v]) {
             u = parent[v];
-            path_flow = min(path_flow, rGraph[u][v]);
+            path_flow = min(path_flow, matrix_get_item(rGraph, u, v));
         }
 
         // update residual capacities of the edges and
         // reverse edges along the path
         for (v = t; v != s; v = parent[v]) {
             u = parent[v];
-            rGraph[u][v] -= path_flow;
-            rGraph[v][u] += path_flow;
+            matrix_set(rGraph, u, v, (matrix_get_item(rGraph, u, v) - path_flow));
+            matrix_set(rGraph, v, u, (matrix_get_item(rGraph, v, u) + path_flow));
+
+//            rGraph[u][v] -= path_flow;
+//            rGraph[v][u] += path_flow;
         }
 
         // Add path flow to overall flow

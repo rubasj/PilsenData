@@ -128,18 +128,31 @@ CMakeFiles/PilsenData.dir/src/vector/vector.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/PilsenData.dir/src/vector/vector.c.s"
 	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\vector\vector.c" -o CMakeFiles\PilsenData.dir\src\vector\vector.c.s
 
-CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.obj: CMakeFiles/PilsenData.dir/flags.make
-CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.obj: ../src/ford_fulkerson/ford_fulkerson.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.obj"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\PilsenData.dir\src\ford_fulkerson\ford_fulkerson.c.obj   -c "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\ford_fulkerson\ford_fulkerson.c"
+CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.obj: CMakeFiles/PilsenData.dir/flags.make
+CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.obj: ../src/max_flow/ford_fulkerson.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\PilsenData.dir\src\max_flow\ford_fulkerson.c.obj   -c "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\max_flow\ford_fulkerson.c"
 
-CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.i"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\ford_fulkerson\ford_fulkerson.c" > CMakeFiles\PilsenData.dir\src\ford_fulkerson\ford_fulkerson.c.i
+CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\max_flow\ford_fulkerson.c" > CMakeFiles\PilsenData.dir\src\max_flow\ford_fulkerson.c.i
 
-CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.s"
-	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\ford_fulkerson\ford_fulkerson.c" -o CMakeFiles\PilsenData.dir\src\ford_fulkerson\ford_fulkerson.c.s
+CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\max_flow\ford_fulkerson.c" -o CMakeFiles\PilsenData.dir\src\max_flow\ford_fulkerson.c.s
+
+CMakeFiles/PilsenData.dir/src/minimum_cut/minimum_cut.c.obj: CMakeFiles/PilsenData.dir/flags.make
+CMakeFiles/PilsenData.dir/src/minimum_cut/minimum_cut.c.obj: ../src/minimum_cut/minimum_cut.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/PilsenData.dir/src/minimum_cut/minimum_cut.c.obj"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\PilsenData.dir\src\minimum_cut\minimum_cut.c.obj   -c "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\minimum_cut\minimum_cut.c"
+
+CMakeFiles/PilsenData.dir/src/minimum_cut/minimum_cut.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/PilsenData.dir/src/minimum_cut/minimum_cut.c.i"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\minimum_cut\minimum_cut.c" > CMakeFiles\PilsenData.dir\src\minimum_cut\minimum_cut.c.i
+
+CMakeFiles/PilsenData.dir/src/minimum_cut/minimum_cut.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/PilsenData.dir/src/minimum_cut/minimum_cut.c.s"
+	C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\src\minimum_cut\minimum_cut.c" -o CMakeFiles\PilsenData.dir\src\minimum_cut\minimum_cut.c.s
 
 # Object files for target PilsenData
 PilsenData_OBJECTS = \
@@ -147,7 +160,8 @@ PilsenData_OBJECTS = \
 "CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj" \
 "CMakeFiles/PilsenData.dir/src/edge/edge.c.obj" \
 "CMakeFiles/PilsenData.dir/src/vector/vector.c.obj" \
-"CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.obj"
+"CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.obj" \
+"CMakeFiles/PilsenData.dir/src/minimum_cut/minimum_cut.c.obj"
 
 # External object files for target PilsenData
 PilsenData_EXTERNAL_OBJECTS =
@@ -156,12 +170,13 @@ PilsenData.exe: CMakeFiles/PilsenData.dir/src/loader.c.obj
 PilsenData.exe: CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj
 PilsenData.exe: CMakeFiles/PilsenData.dir/src/edge/edge.c.obj
 PilsenData.exe: CMakeFiles/PilsenData.dir/src/vector/vector.c.obj
-PilsenData.exe: CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.obj
+PilsenData.exe: CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.obj
+PilsenData.exe: CMakeFiles/PilsenData.dir/src/minimum_cut/minimum_cut.c.obj
 PilsenData.exe: CMakeFiles/PilsenData.dir/build.make
 PilsenData.exe: CMakeFiles/PilsenData.dir/linklibs.rsp
 PilsenData.exe: CMakeFiles/PilsenData.dir/objects1.rsp
 PilsenData.exe: CMakeFiles/PilsenData.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Linking C executable PilsenData.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable PilsenData.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\PilsenData.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

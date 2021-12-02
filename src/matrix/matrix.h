@@ -57,6 +57,7 @@ void matrix_free(matrix **poor);
  */
 void matrix_set(matrix *mat, const size_t row, const size_t col, mat_num_t val);
 
+mat_num_t matrix_get_item(matrix *mat, const size_t row, const size_t col);
 
 void matrix_fill_edges( matrix *mat_cap, matrix *mat_id, const vector_t *nodes, const vector_t *edges);
 

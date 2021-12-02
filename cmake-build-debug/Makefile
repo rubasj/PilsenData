@@ -169,33 +169,6 @@ src/edge/edge.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/edge/edge.c.s
 .PHONY : src/edge/edge.c.s
 
-src/ford_fulkerson/ford_fulkerson.obj: src/ford_fulkerson/ford_fulkerson.c.obj
-
-.PHONY : src/ford_fulkerson/ford_fulkerson.obj
-
-# target to build an object file
-src/ford_fulkerson/ford_fulkerson.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.obj
-.PHONY : src/ford_fulkerson/ford_fulkerson.c.obj
-
-src/ford_fulkerson/ford_fulkerson.i: src/ford_fulkerson/ford_fulkerson.c.i
-
-.PHONY : src/ford_fulkerson/ford_fulkerson.i
-
-# target to preprocess a source file
-src/ford_fulkerson/ford_fulkerson.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.i
-.PHONY : src/ford_fulkerson/ford_fulkerson.c.i
-
-src/ford_fulkerson/ford_fulkerson.s: src/ford_fulkerson/ford_fulkerson.c.s
-
-.PHONY : src/ford_fulkerson/ford_fulkerson.s
-
-# target to generate assembly for a file
-src/ford_fulkerson/ford_fulkerson.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/ford_fulkerson/ford_fulkerson.c.s
-.PHONY : src/ford_fulkerson/ford_fulkerson.c.s
-
 src/loader.obj: src/loader.c.obj
 
 .PHONY : src/loader.obj
@@ -250,6 +223,60 @@ src/matrix/matrix.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/matrix/matrix.c.s
 .PHONY : src/matrix/matrix.c.s
 
+src/max_flow/ford_fulkerson.obj: src/max_flow/ford_fulkerson.c.obj
+
+.PHONY : src/max_flow/ford_fulkerson.obj
+
+# target to build an object file
+src/max_flow/ford_fulkerson.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.obj
+.PHONY : src/max_flow/ford_fulkerson.c.obj
+
+src/max_flow/ford_fulkerson.i: src/max_flow/ford_fulkerson.c.i
+
+.PHONY : src/max_flow/ford_fulkerson.i
+
+# target to preprocess a source file
+src/max_flow/ford_fulkerson.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.i
+.PHONY : src/max_flow/ford_fulkerson.c.i
+
+src/max_flow/ford_fulkerson.s: src/max_flow/ford_fulkerson.c.s
+
+.PHONY : src/max_flow/ford_fulkerson.s
+
+# target to generate assembly for a file
+src/max_flow/ford_fulkerson.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.s
+.PHONY : src/max_flow/ford_fulkerson.c.s
+
+src/minimum_cut/minimum_cut.obj: src/minimum_cut/minimum_cut.c.obj
+
+.PHONY : src/minimum_cut/minimum_cut.obj
+
+# target to build an object file
+src/minimum_cut/minimum_cut.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/minimum_cut/minimum_cut.c.obj
+.PHONY : src/minimum_cut/minimum_cut.c.obj
+
+src/minimum_cut/minimum_cut.i: src/minimum_cut/minimum_cut.c.i
+
+.PHONY : src/minimum_cut/minimum_cut.i
+
+# target to preprocess a source file
+src/minimum_cut/minimum_cut.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/minimum_cut/minimum_cut.c.i
+.PHONY : src/minimum_cut/minimum_cut.c.i
+
+src/minimum_cut/minimum_cut.s: src/minimum_cut/minimum_cut.c.s
+
+.PHONY : src/minimum_cut/minimum_cut.s
+
+# target to generate assembly for a file
+src/minimum_cut/minimum_cut.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/minimum_cut/minimum_cut.c.s
+.PHONY : src/minimum_cut/minimum_cut.c.s
+
 src/vector/vector.obj: src/vector/vector.c.obj
 
 .PHONY : src/vector/vector.obj
@@ -289,15 +316,18 @@ help:
 	@echo ... src/edge/edge.obj
 	@echo ... src/edge/edge.i
 	@echo ... src/edge/edge.s
-	@echo ... src/ford_fulkerson/ford_fulkerson.obj
-	@echo ... src/ford_fulkerson/ford_fulkerson.i
-	@echo ... src/ford_fulkerson/ford_fulkerson.s
 	@echo ... src/loader.obj
 	@echo ... src/loader.i
 	@echo ... src/loader.s
 	@echo ... src/matrix/matrix.obj
 	@echo ... src/matrix/matrix.i
 	@echo ... src/matrix/matrix.s
+	@echo ... src/max_flow/ford_fulkerson.obj
+	@echo ... src/max_flow/ford_fulkerson.i
+	@echo ... src/max_flow/ford_fulkerson.s
+	@echo ... src/minimum_cut/minimum_cut.obj
+	@echo ... src/minimum_cut/minimum_cut.i
+	@echo ... src/minimum_cut/minimum_cut.s
 	@echo ... src/vector/vector.obj
 	@echo ... src/vector/vector.i
 	@echo ... src/vector/vector.s

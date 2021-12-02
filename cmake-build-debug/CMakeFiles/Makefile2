@@ -93,12 +93,12 @@ clean: CMakeFiles/PilsenData.dir/clean
 CMakeFiles/PilsenData.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\cmake-build-debug\CMakeFiles" --progress-num=1,2,3,4,5,6 "Built target PilsenData"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\cmake-build-debug\CMakeFiles" --progress-num=1,2,3,4,5,6,7 "Built target PilsenData"
 .PHONY : CMakeFiles/PilsenData.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/PilsenData.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\cmake-build-debug\CMakeFiles" 6
+	$(CMAKE_COMMAND) -E cmake_progress_start "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\cmake-build-debug\CMakeFiles" 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/PilsenData.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "E:\SKOLA_ZCU\4. rocnik\KIV_PC\PilsenData\cmake-build-debug\CMakeFiles" 0
 .PHONY : CMakeFiles/PilsenData.dir/rule

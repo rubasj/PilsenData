@@ -52,6 +52,13 @@ void matrix_free(matrix **poor) {
     *poor = NULL;
 }
 
+mat_num_t matrix_get_item(matrix *mat, const size_t row, const size_t col) {
+    if (!mat || !mat->items) {
+    return -1;
+    }
+    return mat->items[row * mat->cols + col];
+}
+
 
 void matrix_set(matrix *mat, const size_t row, const size_t col, mat_num_t val) {
     printf("SET src %d, tar %d, cap %d\n", row, col, val);
@@ -106,7 +113,7 @@ void matrix_fill_edges( matrix *mat_cap, matrix *mat_id, const vector_t *nodes, 
 //        matrix_print(mat_id);
     }
 
-//    matrix_print(mat_cap);
+    matrix_print(mat_cap);
     matrix_print(mat_id);
 
 }
