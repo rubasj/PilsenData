@@ -89,16 +89,16 @@
 		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/matrix/matrix.h">
 			<Option target="PilsenData"/>
 		</Unit>
-		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/max_flow/ford_fulkerson.c">
+		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/max_flow/algorithm.c">
 			<Option target="PilsenData"/>
 		</Unit>
-		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/max_flow/ford_fulkerson.h">
+		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/max_flow/algorithm.h">
 			<Option target="PilsenData"/>
 		</Unit>
-		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/minimum_cut/minimum_cut.c">
+		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/queue/queue.c">
 			<Option target="PilsenData"/>
 		</Unit>
-		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/minimum_cut/minimum_cut.h">
+		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/queue/queue.h">
 			<Option target="PilsenData"/>
 		</Unit>
 		<Unit filename="E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/vector/vector.c">

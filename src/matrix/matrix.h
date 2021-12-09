@@ -57,15 +57,16 @@ void matrix_free(matrix **poor);
  */
 void matrix_set(matrix *mat, const size_t row, const size_t col, mat_num_t val);
 
-mat_num_t matrix_get_item(matrix *mat, const size_t row, const size_t col);
+mat_num_t matrix_get_item(const matrix *mat, const size_t row, const size_t col);
 
 void matrix_fill_edges( matrix *mat_cap, matrix *mat_id, const vector_t *nodes, const vector_t *edges);
 
+matrix *matrix_duplicate(const matrix *original);
 
 int get_node_position(const vector_t *nodes, const int id_node);
 
 
-void matrix_print(matrix *m);
+void matrix_print(const matrix *m);
 #endif //PILSENDATA_MATRIX_H
 
 

@@ -7,6 +7,8 @@ CMakeFiles/PilsenData.dir/src/edge/edge.c.obj: ../src/edge/edge.h
 CMakeFiles/PilsenData.dir/src/loader.c.obj: ../src/edge/edge.h
 CMakeFiles/PilsenData.dir/src/loader.c.obj: ../src/loader.c
 CMakeFiles/PilsenData.dir/src/loader.c.obj: ../src/matrix/matrix.h
+CMakeFiles/PilsenData.dir/src/loader.c.obj: ../src/max_flow/algorithm.h
+CMakeFiles/PilsenData.dir/src/loader.c.obj: ../src/queue/queue.h
 CMakeFiles/PilsenData.dir/src/loader.c.obj: ../src/vector/vector.h
 
 CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj: ../src/edge/edge.h
@@ -14,14 +16,15 @@ CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj: ../src/matrix/matrix.c
 CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj: ../src/matrix/matrix.h
 CMakeFiles/PilsenData.dir/src/matrix/matrix.c.obj: ../src/vector/vector.h
 
-CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.obj: ../src/edge/edge.h
-CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.obj: ../src/matrix/matrix.h
-CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.obj: ../src/max_flow/ford_fulkerson.c
-CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.obj: ../src/max_flow/ford_fulkerson.h
-CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.obj: ../src/vector/vector.h
+CMakeFiles/PilsenData.dir/src/max_flow/algorithm.c.obj: ../src/edge/edge.h
+CMakeFiles/PilsenData.dir/src/max_flow/algorithm.c.obj: ../src/matrix/matrix.h
+CMakeFiles/PilsenData.dir/src/max_flow/algorithm.c.obj: ../src/max_flow/algorithm.c
+CMakeFiles/PilsenData.dir/src/max_flow/algorithm.c.obj: ../src/max_flow/algorithm.h
+CMakeFiles/PilsenData.dir/src/max_flow/algorithm.c.obj: ../src/queue/queue.h
+CMakeFiles/PilsenData.dir/src/max_flow/algorithm.c.obj: ../src/vector/vector.h
 
-CMakeFiles/PilsenData.dir/src/minimum_cut/minimum_cut.c.obj: ../src/minimum_cut/minimum_cut.c
-CMakeFiles/PilsenData.dir/src/minimum_cut/minimum_cut.c.obj: ../src/minimum_cut/minimum_cut.h
+CMakeFiles/PilsenData.dir/src/queue/queue.c.obj: ../src/queue/queue.c
+CMakeFiles/PilsenData.dir/src/queue/queue.c.obj: ../src/queue/queue.h
 
 CMakeFiles/PilsenData.dir/src/vector/vector.c.obj: ../src/vector/vector.c
 CMakeFiles/PilsenData.dir/src/vector/vector.c.obj: ../src/vector/vector.h

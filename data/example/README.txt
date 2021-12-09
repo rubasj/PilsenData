@@ -1,6 +1,6 @@
 Ukázka možného použití programu flow.exe v tomto adresáři nad testovacími daty:
 
-> flow.exe -s 0 -t 6 -v example_nouds.csv -e example_edges.csv
+> flow.exe -s 0 -t 6 -v example_nodds.csv -e example_edges.csv
 Invalid vertex file.
 > flow.exe -s 0 -t 6 -v example_nodes.csv -e example_edzis.csv
 Invalid edge file.

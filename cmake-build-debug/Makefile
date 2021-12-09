@@ -223,59 +223,59 @@ src/matrix/matrix.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/matrix/matrix.c.s
 .PHONY : src/matrix/matrix.c.s
 
-src/max_flow/ford_fulkerson.obj: src/max_flow/ford_fulkerson.c.obj
+src/max_flow/algorithm.obj: src/max_flow/algorithm.c.obj
 
-.PHONY : src/max_flow/ford_fulkerson.obj
-
-# target to build an object file
-src/max_flow/ford_fulkerson.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.obj
-.PHONY : src/max_flow/ford_fulkerson.c.obj
-
-src/max_flow/ford_fulkerson.i: src/max_flow/ford_fulkerson.c.i
-
-.PHONY : src/max_flow/ford_fulkerson.i
-
-# target to preprocess a source file
-src/max_flow/ford_fulkerson.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.i
-.PHONY : src/max_flow/ford_fulkerson.c.i
-
-src/max_flow/ford_fulkerson.s: src/max_flow/ford_fulkerson.c.s
-
-.PHONY : src/max_flow/ford_fulkerson.s
-
-# target to generate assembly for a file
-src/max_flow/ford_fulkerson.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/max_flow/ford_fulkerson.c.s
-.PHONY : src/max_flow/ford_fulkerson.c.s
-
-src/minimum_cut/minimum_cut.obj: src/minimum_cut/minimum_cut.c.obj
-
-.PHONY : src/minimum_cut/minimum_cut.obj
+.PHONY : src/max_flow/algorithm.obj
 
 # target to build an object file
-src/minimum_cut/minimum_cut.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/minimum_cut/minimum_cut.c.obj
-.PHONY : src/minimum_cut/minimum_cut.c.obj
+src/max_flow/algorithm.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/max_flow/algorithm.c.obj
+.PHONY : src/max_flow/algorithm.c.obj
 
-src/minimum_cut/minimum_cut.i: src/minimum_cut/minimum_cut.c.i
+src/max_flow/algorithm.i: src/max_flow/algorithm.c.i
 
-.PHONY : src/minimum_cut/minimum_cut.i
+.PHONY : src/max_flow/algorithm.i
 
 # target to preprocess a source file
-src/minimum_cut/minimum_cut.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/minimum_cut/minimum_cut.c.i
-.PHONY : src/minimum_cut/minimum_cut.c.i
+src/max_flow/algorithm.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/max_flow/algorithm.c.i
+.PHONY : src/max_flow/algorithm.c.i
 
-src/minimum_cut/minimum_cut.s: src/minimum_cut/minimum_cut.c.s
+src/max_flow/algorithm.s: src/max_flow/algorithm.c.s
 
-.PHONY : src/minimum_cut/minimum_cut.s
+.PHONY : src/max_flow/algorithm.s
 
 # target to generate assembly for a file
-src/minimum_cut/minimum_cut.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/minimum_cut/minimum_cut.c.s
-.PHONY : src/minimum_cut/minimum_cut.c.s
+src/max_flow/algorithm.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/max_flow/algorithm.c.s
+.PHONY : src/max_flow/algorithm.c.s
+
+src/queue/queue.obj: src/queue/queue.c.obj
+
+.PHONY : src/queue/queue.obj
+
+# target to build an object file
+src/queue/queue.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/queue/queue.c.obj
+.PHONY : src/queue/queue.c.obj
+
+src/queue/queue.i: src/queue/queue.c.i
+
+.PHONY : src/queue/queue.i
+
+# target to preprocess a source file
+src/queue/queue.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/queue/queue.c.i
+.PHONY : src/queue/queue.c.i
+
+src/queue/queue.s: src/queue/queue.c.s
+
+.PHONY : src/queue/queue.s
+
+# target to generate assembly for a file
+src/queue/queue.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\PilsenData.dir\build.make CMakeFiles/PilsenData.dir/src/queue/queue.c.s
+.PHONY : src/queue/queue.c.s
 
 src/vector/vector.obj: src/vector/vector.c.obj
 
@@ -322,12 +322,12 @@ help:
 	@echo ... src/matrix/matrix.obj
 	@echo ... src/matrix/matrix.i
 	@echo ... src/matrix/matrix.s
-	@echo ... src/max_flow/ford_fulkerson.obj
-	@echo ... src/max_flow/ford_fulkerson.i
-	@echo ... src/max_flow/ford_fulkerson.s
-	@echo ... src/minimum_cut/minimum_cut.obj
-	@echo ... src/minimum_cut/minimum_cut.i
-	@echo ... src/minimum_cut/minimum_cut.s
+	@echo ... src/max_flow/algorithm.obj
+	@echo ... src/max_flow/algorithm.i
+	@echo ... src/max_flow/algorithm.s
+	@echo ... src/queue/queue.obj
+	@echo ... src/queue/queue.i
+	@echo ... src/queue/queue.s
 	@echo ... src/vector/vector.obj
 	@echo ... src/vector/vector.i
 	@echo ... src/vector/vector.s
