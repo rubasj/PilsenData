@@ -68,9 +68,9 @@ void dfs(matrix *rGraph, int s, int *visited)
 }
 
 // Prints the minimum s-t cut
-void ford_fulkerson(const matrix *graph, int s, int t) {
+void ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int out_active) {
 
-    if (!graph) {
+    if (!graph || s == -1 || t == -1) {
         printf("Ford_fulkerson: Missing argument.");
         return;
     }
@@ -81,7 +81,7 @@ void ford_fulkerson(const matrix *graph, int s, int t) {
     // in residual graph
     matrix *rGraph;
     rGraph = matrix_duplicate(graph);
-    matrix_print(rGraph);
+//    matrix_print(rGraph);
 
     int parent[rGraph->cols]; // This array is filled by BFS and to store path
     int max_flow = 0; // There is no flow initially
@@ -108,7 +108,7 @@ void ford_fulkerson(const matrix *graph, int s, int t) {
     }
     printf("\n");
 
-    matrix_print(graph);
+//    matrix_print(graph);
 
     printf("Max network flow is |x| = %d.\n", max_flow);
 
@@ -117,14 +117,15 @@ void ford_fulkerson(const matrix *graph, int s, int t) {
     memset(visited, 0, sizeof(visited));
     dfs(rGraph, s, visited);
 
+    int edge_id;
     // Print all edges that are from a reachable vertex to
     // non-reachable vertex in the original graph
     for (int i = 0; i < rGraph->cols; i++) {
         for (int j = 0; j < rGraph->cols; j++) {
 
             if (visited[i] && !visited[j] && matrix_get_item(graph, i, j)) {
-
-                printf("%d - %d\n", i, j);
+                edge_id = matrix_get_item(m_edges, i, j);
+                printf("%d\n", edge_id); //OK
             }
         }
     }

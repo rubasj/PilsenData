@@ -2,16 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include "matrix/matrix.h"
-#include "edge/edge.h"
-#include "vector/vector.h"
+
 #include "max_flow/algorithm.h"
 
 /* Predpokladana delka radky */
 #define LINE_LEN 8192
 #define DELIMITER ","
-
-#define IS_VALID "True"
-
 
 int check_vector_node_duplicates(const vector_t *v, const int id) {
     int i;
@@ -37,16 +33,17 @@ int check_vector_edge_duplicates(const vector_t *v, const int id) {
 }
 
 
-vector_t * load_nodes(const char *file_name) {
+vector_t *load_nodes(const char *file_name) {
     /* Souborovy vstup/vystup */
     FILE *fr;
     char line[LINE_LEN];
     /* pole vsech uzlu, defaultne nastaveno na "4" prvky, bude se zvetsovat*/
     vector_t *nodes;
 
-    if (!file_name)
-        return NULL;
 
+    if (!file_name || strstr(file_name, ".csv") == NULL) {
+        return NULL;
+    }
 
 
     //otevreni souboru
@@ -118,7 +115,7 @@ vector_t * load_edges(const char *file_name, const int switcher) {
 
     vector_t *temps;
 
-    if (!file_name) {
+    if (!file_name || strstr(file_name, ".csv") == NULL) {
         return NULL;
     }
 
@@ -170,17 +167,29 @@ vector_t * load_edges(const char *file_name, const int switcher) {
     return temps;
 }
 
+int find_node_position_in_vector(const vector_t *nodes, int node_id) {
+
+    int i;
+
+    for (i = 0;  i < nodes->count; i++) {
+        if ((*(int *)vector_at(nodes, i)) == node_id)
+            return i;
+    }
+
+    return -1;
+}
+
 
 int main(int argc, char **argv) {
 
     int i;
     if (argc <= 9) {
         printf("Usage: Missing arguments.");
-        return 0;
+        return EXIT_FAILURE;
     }
 
     /* pokud je switcher == 1, budeme brat taky jeste neexistujici useky silnic */
-    int switcher = 0, source_id, target_id;
+    int switcher = 0, out_active = 0, source_id, target_id;
     char *vertex_file, *edge_file, *output_file;
     /* argv[0] vzdy obsahuje nazev binarniho souboru */
     for (i = 1; i < argc; i++) {
@@ -208,6 +217,7 @@ int main(int argc, char **argv) {
         }
         /* nastaveni vystupu */
         if (strcmp(argv[i], "-out") == 0) {
+            out_active = 1;
             output_file = argv[i+1];
             continue;
         }
@@ -219,45 +229,73 @@ int main(int argc, char **argv) {
         }
     }
 
+    if (!vertex_file || !edge_file || !output_file && out_active != 0){
+        printf("Missing arguments.\n");
+        return EXIT_FAILURE;
+    }
+
 
     vector_t *list_nodes;
     vector_t *list_edges;
     matrix *m_capacities;
     matrix *m_edges;
 
-
-//    list_nodes = load_nodes("./data/plzen/pilsen_nodes.csv");
-//    list_nodes = load_nodes("./data/example/example_nodes.csv");
     list_nodes = load_nodes(vertex_file);
     if (!list_nodes) {
+        vector_destroy(&list_nodes);
         printf("Invalid vertex file.\n");
-        return 1;
+        return 1; /*dle zadani*/
     }
 
-//    list_edges = load_edges("./data/plzen/pilsen_edges.csv", 0);
-//    list_edges = load_edges("./data/example/example_edges.csv", switcher);
     list_edges = load_edges(edge_file, switcher);
-//    for (int i = 0; i < list_edges->count; ++i) {
-//        printf("id: %d, src: %d, tar: %d\n", (*(edge **)vector_at(list_edges, i))->id, (*(edge **)vector_at(list_edges, i))->source, (*(edge **)vector_at(list_edges, i))->target);
-//    }
+
     if (!list_edges) {
+        vector_destroy(&list_nodes);
+        vector_destroy(&list_edges);
         printf("Invalid edges file.\n"); //TODO check
-        return 6;
+        return 6; /*dle zadani*/
     }
 
-
-    m_edges = matrix_create(vector_count(list_nodes), vector_count(list_nodes), -1);
-    m_capacities = matrix_create(vector_count(list_nodes), vector_count(list_nodes), 0);
+    /* vytvoreni matic obsahujici id a kapacity hran v grafu */
+    m_edges = matrix_create(vector_count(list_nodes), vector_count(list_nodes), -1); /* -1 hrana mezi nody neexistuje */
+    m_capacities = matrix_create(vector_count(list_nodes), vector_count(list_nodes), 0); /* 0 neni zadna kapacita (neexistuje node) */
 
     if (!m_capacities || !m_edges) {
-        printf("Matrix not created");
-        return -1;
+        vector_destroy(&list_nodes);
+        vector_destroy(&list_edges);
+        printf("Matrix not created.");
+        return EXIT_FAILURE;
+    }
+
+
+    int sink = find_node_position_in_vector(list_nodes, target_id);
+    if (sink == -1) {
+        vector_destroy(&list_nodes);
+        vector_destroy(&list_edges);
+
+        matrix_free(&m_edges);
+        matrix_free(&m_capacities);
+        printf("Invalid sink vertex.\n");
+        return 4; // dle zadani
     }
 
     matrix_fill_edges(m_capacities, m_edges, list_nodes, list_edges);
 
-    ford_fulkerson(m_capacities, source_id, target_id);
+    int source = find_node_position_in_vector(list_nodes, source_id);
+    if (source == -1) {
+        vector_destroy(&list_nodes);
+        vector_destroy(&list_edges);
 
+        matrix_free(&m_edges);
+        matrix_free(&m_capacities);
+        printf("Invalid source vertex.\n");
+        return 3; // dle zadani
+    }
+
+
+    ford_fulkerson(m_capacities, m_edges, source, sink, out_active);
+
+//    matrix_print(m_edges);
 
     vector_destroy(&list_nodes);
     vector_destroy(&list_edges);
@@ -265,5 +303,5 @@ int main(int argc, char **argv) {
     matrix_free(&m_edges);
     matrix_free(&m_capacities);
 
-    return 0;
+    return EXIT_SUCCESS;
 }

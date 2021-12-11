@@ -13,7 +13,6 @@ edge *edge_create(char *line) {
 //    printf("%s \n", line);
     edge *temp = NULL;
     char *token;
-    char *tmp_line;
 
     if (!line) {
         return NULL;
@@ -23,9 +22,9 @@ edge *edge_create(char *line) {
     if (!temp) {
         return NULL;
     }
-    temp->description = line;
-    tmp_line = line;
-    token = strtok(tmp_line, DELIM);
+    memset(temp->description, 0, strlen(temp->description));
+    memcpy(temp->description, line, strlen(line));
+    token = strtok(line, DELIM);
 
     int idx = 0;
     while (token != NULL)
@@ -63,7 +62,9 @@ edge *edge_create(char *line) {
         token = strtok(NULL, DELIM);
     }
 
-
+//    if (temp->id > ) {
+//        printf("%s\n",temp->description);
+//    }
     return temp;
 }
 
@@ -73,7 +74,7 @@ void edge_destroy(edge **poor){
     }
 
     free((*poor)->description);
-    (*poor)->description = NULL;
+//    (*poor)->description = NULL;
 
     (*poor)->id = 0;
     (*poor)->target = 0;
@@ -84,4 +85,13 @@ void edge_destroy(edge **poor){
     *poor = NULL;
 }
 
+edge *find_edge_by_id(const vector_t *vec, size_t id) {
+    size_t i;
 
+    for (i = 0; i < vector_count(vec); ++i) {
+        if ((*(edge **)vector_at(vec, i))->id == id) {
+            return (*(edge **)vector_at(vec, i));
+        }
+    }
+    return NULL;
+}

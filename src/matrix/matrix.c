@@ -97,11 +97,13 @@ void matrix_fill_edges( matrix *mat_cap, matrix *mat_id, const vector_t *nodes, 
         return;
     }
 
+
     for (i = 0; i < vector_count(edges); ++i) {
         source = (*(edge **)vector_at(edges, i))->source;
         target = (*(edge **)vector_at(edges, i))->target;
         capacity = (*(edge **)vector_at(edges, i))->capacity;
         id_edge = (*(edge **)vector_at(edges, i))->id;
+
         // nastaveni kapacity
         source_pos = get_node_position(nodes, source);
 
@@ -112,8 +114,6 @@ void matrix_fill_edges( matrix *mat_cap, matrix *mat_id, const vector_t *nodes, 
         matrix_set(mat_id, get_node_position(nodes, source), get_node_position(nodes, target), id_edge);
     }
 
-//    matrix_print(mat_cap);
-//    matrix_print(mat_id);
 
 }
 

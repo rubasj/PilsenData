@@ -13,5 +13,5 @@
 
 
 int bfs(matrix *rGraph, const int s, const int t, int *parent);
-void ford_fulkerson(const matrix *graph, int s, int t);
+void ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int out_active);
 #endif //PILSENDATA_ALGORITHM_H

@@ -8,13 +8,14 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "../vector/vector.h"
 
 typedef struct edge_{
     int id;
     int source;  /* pocatecni vrchol */
     int target;
     int capacity;
-    char *description;
+    char description[8192];
 } edge;
 
 /**
@@ -29,5 +30,6 @@ edge *edge_create(char *line);
  */
 void edge_destroy(edge **poor);
 
+edge *find_edge_by_id(const vector_t *vec, size_t id);
 
 #endif //PILSENDATA_EDGE_H

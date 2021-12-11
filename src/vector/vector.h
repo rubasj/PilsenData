@@ -99,7 +99,7 @@ int vector_push_back(vector_t *v, const void *item);
  * @param v Ukazatel na vektor.
  * @return int 1, pokud je vektor prázdný, jinak 0.
  */
-int vector_isempty(const vector_t *v);
+int vector_is_empty(const vector_t *v);
 
 /**
  * @brief Vrátí počet prvků vektoru.

@@ -70,7 +70,7 @@ void vector_destroy(vector_t **v) {
 void *vector_giveup(vector_t *v) {
     void *data;
 
-    if (!v || vector_isempty(v)) {
+    if (!v || vector_is_empty(v)) {
         return NULL;
     }
 
@@ -133,7 +133,7 @@ int vector_push_back(vector_t *v, const void *item) {
     return 1;
 }
 
-int vector_isempty(const vector_t *v)  {
+int vector_is_empty(const vector_t *v)  {
     return !v || vector_count(v) == 0;
 }
 
