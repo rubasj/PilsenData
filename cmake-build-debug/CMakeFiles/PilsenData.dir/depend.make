@@ -3,6 +3,7 @@
 
 CMakeFiles/PilsenData.dir/src/edge/edge.c.obj: ../src/edge/edge.c
 CMakeFiles/PilsenData.dir/src/edge/edge.c.obj: ../src/edge/edge.h
+CMakeFiles/PilsenData.dir/src/edge/edge.c.obj: ../src/vector/vector.h
 
 CMakeFiles/PilsenData.dir/src/loader.c.obj: ../src/edge/edge.h
 CMakeFiles/PilsenData.dir/src/loader.c.obj: ../src/loader.c

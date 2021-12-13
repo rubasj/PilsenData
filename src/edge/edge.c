@@ -85,10 +85,10 @@ void edge_destroy(edge **poor){
     *poor = NULL;
 }
 
-edge *find_edge_by_id(const vector_t *vec, size_t id) {
-    size_t i;
-
+edge *find_edge_by_id(const vector_t *vec, int id) {
+    int i;
     for (i = 0; i < vector_count(vec); ++i) {
+        int x = (*(edge **)vector_at(vec, i))->id;
         if ((*(edge **)vector_at(vec, i))->id == id) {
             return (*(edge **)vector_at(vec, i));
         }

@@ -9,6 +9,45 @@
 #define LINE_LEN 8192
 #define DELIMITER ","
 
+
+
+int print_output(const vector_t *edges, const vector_t *min_cut, const char *file) {
+
+    if (!edges || !min_cut || !file) {
+        return 0;
+    }
+
+    FILE *fw;
+
+    fw = fopen(file, "w");
+
+    int i;
+
+    /* zjisteni zda se soubor pro zapis otevrel */
+    if (fw == NULL) {
+        printf("Vystupni soubor se nepodarilo otevrit");
+        return 0;
+    }
+    edge *e; int id;
+
+    for (i = 0; i < vector_count(min_cut); i++) {
+
+        id = *(int *)vector_at(min_cut, i);
+        e = find_edge_by_id(edges, id);
+
+        fputs(e->description, fw);
+
+    }
+    /* Uzavreni souboru  fw */
+    if (fclose(fw) == EOF) {
+        printf("Soubor pro zapis se nepodarilo uzavrit (fsm.c)");
+        return 0;
+    }
+
+    return 1;
+}
+
+
 int check_vector_node_duplicates(const vector_t *v, const int id) {
     int i;
     for (i = 0; i < v->count; ++i) {
@@ -46,7 +85,7 @@ vector_t *load_nodes(const char *file_name) {
     }
 
 
-    //otevreni souboru
+    /*otevreni souboru*/
     fr = fopen(file_name, "r");
     if (fr == NULL) {
         printf("No Such File !! ");
@@ -64,13 +103,10 @@ vector_t *load_nodes(const char *file_name) {
     /* vynulovani znaku v pameti "line" */
     memset(line, 0, LINE_LEN);
 
-
-
     while (fgets(line, LINE_LEN, fr)) {
 
-        // pokud line obsahuje "id", automaticky se rozumi, ze jde o prvni radku, rovnou se preskoci
+        /* pokud line obsahuje "id", automaticky se rozumi, ze jde o prvni radku, rovnou se preskoci */
         if (strstr(line, "id") == NULL){
-//            printf("%s\n" de)
             char *token;
 
 
@@ -80,7 +116,6 @@ vector_t *load_nodes(const char *file_name) {
                 tmp = atoi(token);
 
                 check = check_vector_node_duplicates(nodes, tmp);
-//                printf("%d\n",tmp);
                 if (check == 0){
                     if (vector_push_back(nodes, &tmp) == INVALID_INDEX) {
                         vector_destroy(&nodes);
@@ -126,7 +161,7 @@ vector_t * load_edges(const char *file_name, const int switcher) {
         return NULL;
     }
 
-    //otevreni souboru
+    /*otevreni souboru*/
     fr = fopen(file_name, "r");
     if (fr == NULL) {
         printf("No Such File !! ");
@@ -135,7 +170,7 @@ vector_t * load_edges(const char *file_name, const int switcher) {
 
 
     while (fgets(line, LINE_LEN, fr)) {
-        // pokud line obsahuje "id", automaticky se rozumi, ze jde o prvni radku, rovnou se preskoci
+        /* pokud line obsahuje "id", automaticky se rozumi, ze jde o prvni radku, rovnou se preskoci */
         if (strstr(line, "id,source") == NULL) {
             if (switcher == 0 &&
             strstr(line, "False" ) != NULL){
@@ -150,8 +185,6 @@ vector_t * load_edges(const char *file_name, const int switcher) {
             }
             if (check_vector_edge_duplicates(temps, e->id) == 0) {
                 vector_push_back(temps, &e);
-//                    printf("id: %d, src: %d, tar: %d, cap: %d\n", e->id, e->source, e->target, e->capacity);
-
             }
 
         }
@@ -171,7 +204,7 @@ int find_node_position_in_vector(const vector_t *nodes, int node_id) {
 
     int i;
 
-    for (i = 0;  i < nodes->count; i++) {
+    for (i = 0;  i < vector_count(nodes); i++) {
         if ((*(int *)vector_at(nodes, i)) == node_id)
             return i;
     }
@@ -180,6 +213,12 @@ int find_node_position_in_vector(const vector_t *nodes, int node_id) {
 }
 
 
+/**
+ * Vychozi funkce programu
+ * @param argc pocet zadanych parametru v prikazove radce
+ * @param argv pointer na argumenty prikazoveho radku
+ * @return vysledek programu
+ */
 int main(int argc, char **argv) {
 
     int i;
@@ -188,9 +227,14 @@ int main(int argc, char **argv) {
         return EXIT_FAILURE;
     }
 
+
+
     /* pokud je switcher == 1, budeme brat taky jeste neexistujici useky silnic */
-    int switcher = 0, out_active = 0, source_id, target_id;
+    int switcher, out_active, source_id, target_id, sink;
     char *vertex_file, *edge_file, *output_file;
+
+    out_active = 0;
+    switcher = 0;
     /* argv[0] vzdy obsahuje nazev binarniho souboru */
     for (i = 1; i < argc; i++) {
 
@@ -234,17 +278,18 @@ int main(int argc, char **argv) {
         return EXIT_FAILURE;
     }
 
-
     vector_t *list_nodes;
     vector_t *list_edges;
     matrix *m_capacities;
     matrix *m_edges;
 
+
+
     list_nodes = load_nodes(vertex_file);
     if (!list_nodes) {
         vector_destroy(&list_nodes);
         printf("Invalid vertex file.\n");
-        return 1; /*dle zadani*/
+        return 1; /* dle zadani */
     }
 
     list_edges = load_edges(edge_file, switcher);
@@ -252,7 +297,7 @@ int main(int argc, char **argv) {
     if (!list_edges) {
         vector_destroy(&list_nodes);
         vector_destroy(&list_edges);
-        printf("Invalid edges file.\n"); //TODO check
+        printf("Invalid edges file.\n");
         return 6; /*dle zadani*/
     }
 
@@ -268,40 +313,65 @@ int main(int argc, char **argv) {
     }
 
 
-    int sink = find_node_position_in_vector(list_nodes, target_id);
+    sink = find_node_position_in_vector(list_nodes, target_id);
     if (sink == -1) {
-        vector_destroy(&list_nodes);
-        vector_destroy(&list_edges);
 
-        matrix_free(&m_edges);
-        matrix_free(&m_capacities);
         printf("Invalid sink vertex.\n");
-        return 4; // dle zadani
+        return 4; /* dle zadani */
     }
 
     matrix_fill_edges(m_capacities, m_edges, list_nodes, list_edges);
 
     int source = find_node_position_in_vector(list_nodes, source_id);
     if (source == -1) {
-        vector_destroy(&list_nodes);
-        vector_destroy(&list_edges);
 
-        matrix_free(&m_edges);
-        matrix_free(&m_capacities);
+
         printf("Invalid source vertex.\n");
-        return 3; // dle zadani
+        return 3; /* dle zadani */
     }
 
 
-    ford_fulkerson(m_capacities, m_edges, source, sink, out_active);
+    vector_t *min_cut;
+    min_cut = vector_create(sizeof(int *), NULL);
+    /* result (max flow) */
+    int res;
+    res = ford_fulkerson(m_capacities, m_edges, source, sink, out_active, min_cut);
 
-//    matrix_print(m_edges);
+
+    /* pokud v siti neexistuje tok nenulove velikosti program konci 6 */
+    if (res <= 0) {
+
+        vector_destroy(&list_nodes);
+        vector_destroy(&list_edges);
+        matrix_free(&m_edges);
+        matrix_free(&m_capacities);
+        vector_destroy(&min_cut);
+
+        return 6; /* dle zadani */
+    }
+
+    if (out_active == 1) {
+
+        if (print_output(list_edges, min_cut, output_file) == 0) {
+
+            vector_destroy(&list_nodes);
+            vector_destroy(&list_edges);
+            matrix_free(&m_edges);
+            matrix_free(&m_capacities);
+            vector_destroy(&min_cut);
+            return 5;
+        }
+    }
+
 
     vector_destroy(&list_nodes);
     vector_destroy(&list_edges);
-
     matrix_free(&m_edges);
     matrix_free(&m_capacities);
+    vector_destroy(&min_cut);
 
+    #undef clean
     return EXIT_SUCCESS;
 }
+
+

@@ -1,0 +1,10 @@
+CC=gcc.exe
+CFLAGS=-Wall -Wextra
+BIN=max_flow.exe
+OBJS=src/loader.o src/edge/edge.o src/matrix/matrix.o src/max_flow/algorithm.o src/queue/queue.o src/vector/vector.o
+
+.c.o:
+	$(CC) $< -c $(CFLAGS)
+
+$(BIN): $(OBJS)
+	$(CC) $(OBJS) -o $(BIN)

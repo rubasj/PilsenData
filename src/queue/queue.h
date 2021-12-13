@@ -1,6 +1,3 @@
-//
-// Created by janru on 02.12.2021.
-//
 
 #ifndef PILSENDATA_QUEUE_H
 #define PILSENDATA_QUEUE_H
@@ -23,4 +20,4 @@ int isEmpty(const queue* queue);
 int front(queue* queue);
 int rear(queue* queue);
 void free_queue(queue *queue);
-#endif //PILSENDATA_QUEUE_H
+#endif

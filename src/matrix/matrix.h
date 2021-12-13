@@ -1,6 +1,4 @@
-//
-// Created by janru on 21.11.2021.
-//
+
 
 #ifndef PILSENDATA_MATRIX_H
 #define PILSENDATA_MATRIX_H
@@ -67,7 +65,7 @@ int get_node_position(const vector_t *nodes, const int id_node);
 
 
 void matrix_print(const matrix *m);
-#endif //PILSENDATA_MATRIX_H
+#endif
 
 
 

@@ -1,6 +1,3 @@
-//
-// Created by janru on 21.11.2021.
-//
 
 #ifndef PILSENDATA_EDGE_H
 #define PILSENDATA_EDGE_H
@@ -30,6 +27,6 @@ edge *edge_create(char *line);
  */
 void edge_destroy(edge **poor);
 
-edge *find_edge_by_id(const vector_t *vec, size_t id);
+edge *find_edge_by_id(const vector_t *vec, int id);
 
-#endif //PILSENDATA_EDGE_H
+#endif

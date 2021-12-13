@@ -15,21 +15,18 @@ int bfs(matrix *rGraph, const int s, const int t, int *parent)
         printf("BFS: Missing function argument.");
         return 0;
     }
-    // Create a visited array and mark all vertices as not visited
+    /* vytvoreni pole prozkoumanych uzlu */
     int visited[rGraph->cols];
     memset(visited, 0, sizeof(visited));
 
-    // Create a queue, push source vertex and mark source vertex
-    // as visited
+    /* Vytvoreni fronty, vlozeni zdrojoveho uzlu a oznaceni zdroje jako proykoumane */
 
     queue *q;
     q = createQueue(4);
     push(q, s);
-//    q.push(s);
     visited[s] = 1;
     parent[s] = -1;
 
-    // Standard BFS Loop
     while (!isEmpty(q))
     {
         int u = front(q);
@@ -47,8 +44,7 @@ int bfs(matrix *rGraph, const int s, const int t, int *parent)
     }
 
     free_queue(q);
-    // If we reached sink in BFS starting from source, then return
-    // 1, else 0
+    /* pokud dosahne stoku v BFS ze zdroje oznaci jako 1, jinak 0 */
     return visited[t];
 }
 
@@ -67,12 +63,16 @@ void dfs(matrix *rGraph, int s, int *visited)
             dfs(rGraph, i, visited);
 }
 
+int min(int x, int y) {
+return x < y ? x : y;
+}
+
 // Prints the minimum s-t cut
-void ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int out_active) {
+int ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int out_active, vector_t *min_cut) {
 
     if (!graph || s == -1 || t == -1) {
         printf("Ford_fulkerson: Missing argument.");
-        return;
+        return 0;
     }
     int u, v;
 
@@ -81,23 +81,18 @@ void ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int
     // in residual graph
     matrix *rGraph;
     rGraph = matrix_duplicate(graph);
-//    matrix_print(rGraph);
 
-    int parent[rGraph->cols]; // This array is filled by BFS and to store path
-    int max_flow = 0; // There is no flow initially
-    // Augment the flow while there is a path from source to sink
+    int parent[rGraph->cols];
+    int max_flow = 0;
+
     while (bfs(rGraph, s, t, parent)) {
-        // Find minimum residual capacity of the edhes along the
-        // path filled by BFS. Or we can say find the maximum flow
-        // through the path found.
+
         int path_flow = INT_MAX;
         for (v = t; v != s; v = parent[v]) {
             u = parent[v];
             path_flow = min(path_flow, matrix_get_item(rGraph, u, v));
         }
 
-        // update residual capacities of the edges and reverse edges
-        // along the path
         for (v = t; v != s; v = parent[v]) {
             u = parent[v];
             matrix_set(rGraph, u, v, (matrix_get_item(rGraph, u, v) - path_flow));
@@ -108,7 +103,7 @@ void ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int
     }
     printf("\n");
 
-//    matrix_print(graph);
+
 
     printf("Max network flow is |x| = %d.\n", max_flow);
 
@@ -125,11 +120,15 @@ void ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int
 
             if (visited[i] && !visited[j] && matrix_get_item(graph, i, j)) {
                 edge_id = matrix_get_item(m_edges, i, j);
-                printf("%d\n", edge_id); //OK
+                int tmp = vector_push_back(min_cut, &edge_id);
             }
         }
     }
 
+
+
     matrix_free(&rGraph);
+
+    return max_flow;
 }
 
