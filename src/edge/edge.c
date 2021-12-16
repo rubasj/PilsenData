@@ -7,7 +7,6 @@
 #define DELIM ","
 #define DELIM_2 "\""
 
-//TODO create check duplicit id
 
 edge *edge_create(char *line) {
 //    printf("%s \n", line);

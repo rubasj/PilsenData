@@ -61,15 +61,15 @@ mat_num_t matrix_get_item(const matrix *mat, const size_t row, const size_t col)
 
 
 void matrix_set(matrix *mat, const size_t row, const size_t col, mat_num_t val) {
-//    printf("SET src %d, tar %d, cap %d\n", row, col, val);
+/*    printf("SET src %d, tar %d, cap %d\n", row, col, val);*/
     if (!mat || !mat->items) {
         return;
     }
-//    printf("%d - %d\n", val, val);
+    /*printf("%d - %d\n", val, val);*/
 
     mat->items[row * mat->cols + col] = val;
-//    printf("%d\n",  mat->items[row * mat->cols + col]);
-
+/*    printf("%d\n",  mat->items[row * mat->cols + col]);
+*/
 
 
 }
@@ -104,12 +104,12 @@ void matrix_fill_edges( matrix *mat_cap, matrix *mat_id, const vector_t *nodes, 
         capacity = (*(edge **)vector_at(edges, i))->capacity;
         id_edge = (*(edge **)vector_at(edges, i))->id;
 
-        // nastaveni kapacity
-        source_pos = get_node_position(nodes, source);
+/*         nastaveni kapacity
+  */      source_pos = get_node_position(nodes, source);
 
         target_pos = get_node_position(nodes, target);
-//        printf("FILL src %d, tar %d, cap %d\n", source_pos, target_pos, capacity);
-        matrix_set(mat_cap, source_pos, target_pos, capacity);
+/*        printf("FILL src %d, tar %d, cap %d\n", source_pos, target_pos, capacity);
+ */       matrix_set(mat_cap, source_pos, target_pos, capacity);
 
         matrix_set(mat_id, get_node_position(nodes, source), get_node_position(nodes, target), id_edge);
     }
@@ -125,8 +125,8 @@ void matrix_print(const matrix *m)
         printf("|X|\n");
         return;
     }
-//    printf("%d\n", m->rows * m->cols);    TODO: OK
-    for (i = 0; i < m->rows * m->cols; i++) {
+  /*  printf("%d\n", m->rows * m->cols);    TODO: OK
+   */ for (i = 0; i < m->rows * m->cols; i++) {
 
         if (i % (m->cols) == 0) {
             printf("\n");
