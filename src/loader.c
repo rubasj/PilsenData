@@ -230,24 +230,6 @@ vector_t * load_edges(const char *file_name, const int switcher) {
     return temps;
 }
 
-/**
- * Funkce najde index nodu, kde se nachazi ve vektoru
- * @param nodes vector nodes
- * @param node_id node, jehoz index hledame
- * @return kdyz node je v zaznamu, vrati se jeho index, jinak -1
- */
-int find_vertex_position_in_vector(const vector_t *nodes, int node_id) {
-
-    size_t i;
-
-    for (i = 0;  i < vector_count(nodes); i++) {
-        if ((*(int *)vector_at(nodes, i)) == node_id)
-            return i;
-    }
-
-    return -1;
-}
-
 
 /**
  * Vychozi funkce programu
@@ -272,7 +254,7 @@ int main(int argc, char **argv) {
     /* argv[0] vzdy obsahuje nazev binarniho souboru */
     for (i = 1; i < argc; i++) {
 
-        /* nacitani souboru s nodes */
+        /* nacitani souboru s uzly */
         if (strcmp(argv[i], "-v") == 0) {
             vertex_file = argv[i + 1];
             continue;
@@ -332,7 +314,7 @@ int main(int argc, char **argv) {
 
     /* vytvoreni matic obsahujici id a kapacity hran v grafu */
     m_edges = matrix_create(vector_count(list_vertexes), vector_count(list_vertexes), -1); /* -1 hrana mezi nody neexistuje */
-    m_capacities = matrix_create(vector_count(list_vertexes), vector_count(list_vertexes), 0); /* 0 neni zadna kapacita (neexistuje node) */
+    m_capacities = matrix_create(vector_count(list_vertexes), vector_count(list_vertexes), 0); /* 0 neni zadna kapacita (neexistuje uzel) */
 
     if (!m_capacities || !m_edges) {
         vector_destroy(&list_vertexes);
@@ -342,8 +324,8 @@ int main(int argc, char **argv) {
     }
 
 
-    sink = find_vertex_position_in_vector(list_vertexes, target_id);
-    if (sink == -1) {
+    sink = get_vertex_position(list_vertexes, target_id);
+    if (sink < 0) {
 
         printf("Invalid sink vertex.\n");
         return 4; /* dle zadani */
@@ -351,8 +333,8 @@ int main(int argc, char **argv) {
 
     matrix_fill_edges(m_capacities, m_edges, list_vertexes, list_edges);
 
-    source = find_vertex_position_in_vector(list_vertexes, source_id);
-    if (source == -1) {
+    source = get_vertex_position(list_vertexes, source_id);
+    if (source < 0) {
 
 
         printf("Invalid source vertex.\n");

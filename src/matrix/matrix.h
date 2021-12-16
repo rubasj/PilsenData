@@ -9,38 +9,37 @@
 #include "../edge/edge.h"
 #include "../vector/vector.h"
 
-/**< Definice typu pro položky obsažené v matici. */
+/** Definice typu pro polozky obsazene v matici. */
 typedef int mat_num_t;
 
 /**
- * \struct matrix
- * \brief Struktura představující matici s položkami typu mat_num_t.
+ * Struktura představující matici s polozkami typu mat_num_t.
  */
 typedef struct matrix {
-    size_t rows;            /**< Počet řádků matice. */
-    size_t cols;            /**< Počet sloupců matice. */
-    mat_num_t *items;       /**< Ukazatel na data matice. */
+    size_t rows;            /** Pocet radku matice. */
+    size_t cols;            /** Pocet sloupcu matice. */
+    mat_num_t *items;       /** Ukazatel na data matice. */
 } matrix;
 /**
- * \brief matrix_create Funkce dynamicky alokuje novou matici o daných rozměrech
- *                      a jejích položky nastaví na hodnotu i_val.
- * \param rows Počet řádků nové matice.
- * \param cols Počet soupců nové matice.
- * \param i_val Hodnota položek nové matice.
- * \return Ukazatel na nově vytvořenou matici nebo NULL při chybě.
+ * Funkce dynamicky alokuje novou matici o danych rozmerech
+ *  a jejích položky nastaví na hodnotu i_val.
+ * @param rows Pocet radku nove matice.
+ * @param cols Pocet soupcu nove matice.
+ * @param i_val Hodnota polozek nove matice.
+ * @return Ukazatel na nove vytvorenou matici nebo NULL pri chybe.
  */
 matrix *matrix_create(const size_t rows, const size_t cols, const mat_num_t i_val);
 
 /**
- * \brief matrix_fill Funkce nastaví položky zadané matice mat na hodnotu val.
- * \param mat Ukazatel na matici, jejíž položky budou nastaveny.
- * \param val Nová hodnota položek matice.
+ * Funkce nastavi polozky zadane matice mat na hodnotu val.
+ * @param mat Ukazatel na matici, jejiz polozky budou nastaveny.
+ * @param val Nova hodnota polozek matice.
  */
 void matrix_fill(matrix *mat, const mat_num_t val);
 
 /**
- * \brief matrix_free Funkce provede uvolnění dynamicky alokované matice.
- * \param poor Ukazatel na ukazatel na matici určenou k uvolnění.
+ * @brief matrix_free Funkce provede uvolneni dynamicky alokované matice.
+ * @param poor Ukazatel na ukazatel na matici urcenou k uvolneni.
  */
 void matrix_free(matrix **poor);
 
@@ -55,13 +54,38 @@ void matrix_free(matrix **poor);
  */
 void matrix_set(matrix *mat, const size_t row, const size_t col, mat_num_t val);
 
+/**
+ * Funkce pro ziskani konkretniho prvku z matice
+ * @param mat matice, ze ktere chceme ziskat prvek
+ * @param row radkova souradnice prvku
+ * @param col sloupcova souradnice prvku
+ * @return vrati ziskanou hodnotu
+ */
 mat_num_t matrix_get_item(const matrix *mat, const size_t row, const size_t col);
 
-void matrix_fill_edges( matrix *mat_cap, matrix *mat_id, const vector_t *nodes, const vector_t *edges);
+/**
+ * Vlozeni kapacity hran do matice kapacit a vlozeni id hran do matice s id
+ * @param mat_cap matice kapacit
+ * @param mat_id matice id
+ * @param vertexes vektor uzlu
+ * @param edges vektor hran
+ */
+void matrix_fill_edges(matrix *mat_cap, matrix *mat_id, const vector_t *vertexes, const vector_t *edges);
 
+/**
+ * Duplikovani matice
+ * @param original puvodni matice
+ * @return pointer na duplikovanou matici
+ */
 matrix *matrix_duplicate(const matrix *original);
 
-int get_node_position(const vector_t *nodes, const int id_node);
+/**
+ * Funkce najde index nodu, kde se nachazi ve vektoru
+ * @param vertexes vector vertexes
+ * @param vertex_id uzel, jehoz index hledame
+ * @return kdyz uzel je v zaznamu, vrati se jeho index, jinak -1
+ */
+int get_vertex_position(const vector_t *vertexes, const int vertex_id);
 
 
 void matrix_print(const matrix *m);

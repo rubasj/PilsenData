@@ -74,15 +74,16 @@ void matrix_set(matrix *mat, const size_t row, const size_t col, mat_num_t val) 
 
 }
 
-int get_node_position(const vector_t *nodes, const int id_node) {
+int get_vertex_position(const vector_t *vertexes, const int vertex_id) {
 
-    if (!nodes || !id_node){
+    size_t i;
+    if (!vertexes || !vertex_id){
         return 0;
     }
 
-    size_t i;
-    for (i = 0; i < vector_count(nodes); i++) {
-        if (id_node == *(int *)vector_at(nodes, i)) {
+
+    for (i = 0; i < vector_count(vertexes); i++) {
+        if (vertex_id == *(int *)vector_at(vertexes, i)) {
             return i;
         }
     }
@@ -90,13 +91,13 @@ int get_node_position(const vector_t *nodes, const int id_node) {
     return -5;
 }
 
-void matrix_fill_edges( matrix *mat_cap, matrix *mat_id, const vector_t *nodes, const vector_t *edges) {
+void matrix_fill_edges(matrix *mat_cap, matrix *mat_id, const vector_t *vertexes, const vector_t *edges) {
 
-    int i, target, source, capacity, id_edge, source_pos, target_pos;
-    if (!mat_cap || !mat_id || !nodes || !edges) {
+    int target, source, capacity, id_edge, source_pos, target_pos;
+    size_t i;
+    if (!mat_cap || !mat_id || !vertexes || !edges) {
         return;
     }
-
 
     for (i = 0; i < vector_count(edges); ++i) {
         source = (*(edge **)vector_at(edges, i))->source;
@@ -104,29 +105,28 @@ void matrix_fill_edges( matrix *mat_cap, matrix *mat_id, const vector_t *nodes, 
         capacity = (*(edge **)vector_at(edges, i))->capacity;
         id_edge = (*(edge **)vector_at(edges, i))->id;
 
-/*         nastaveni kapacity
-  */      source_pos = get_node_position(nodes, source);
+        /* nastaveni kapacity */
+        source_pos = get_vertex_position(vertexes, source);
 
-        target_pos = get_node_position(nodes, target);
-/*        printf("FILL src %d, tar %d, cap %d\n", source_pos, target_pos, capacity);
- */       matrix_set(mat_cap, source_pos, target_pos, capacity);
+        target_pos = get_vertex_position(vertexes, target);
+        /* printf("FILL src %d, tar %d, cap %d\n", source_pos, target_pos, capacity);*/
+        matrix_set(mat_cap, source_pos, target_pos, capacity);
 
-        matrix_set(mat_id, get_node_position(nodes, source), get_node_position(nodes, target), id_edge);
+        matrix_set(mat_id, get_vertex_position(vertexes, source), get_vertex_position(vertexes, target), id_edge);
     }
-
 
 }
 
 void matrix_print(const matrix *m)
 {
-    int i;
+    size_t i;
     printf("\n");
     if (!m) {
         printf("|X|\n");
         return;
     }
-  /*  printf("%d\n", m->rows * m->cols);    TODO: OK
-   */ for (i = 0; i < m->rows * m->cols; i++) {
+    /*  printf("%d\n", m->rows * m->cols); */
+    for (i = 0; i < m->rows * m->cols; i++) {
 
         if (i % (m->cols) == 0) {
             printf("\n");
@@ -142,7 +142,7 @@ void matrix_print(const matrix *m)
 
 matrix *matrix_duplicate(const matrix *original) {
     matrix *new_mat;
-    int i,j;
+    size_t i, j;
 
     if (!original) {
         return NULL;
