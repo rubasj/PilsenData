@@ -1,6 +1,3 @@
-//
-// Created by janru on 21.11.2021.
-//
 
 #include "edge.h"
 
@@ -9,14 +6,13 @@
 
 
 edge *edge_create(char *line) {
-//    printf("%s \n", line);
     edge *temp = NULL;
     char *token;
+    int idx;
 
     if (!line) {
         return NULL;
     }
-//    printf(line);
     temp = (edge *) malloc(sizeof(edge));
     if (!temp) {
         return NULL;
@@ -25,13 +21,12 @@ edge *edge_create(char *line) {
     memcpy(temp->description, line, strlen(line));
     token = strtok(line, DELIM);
 
-    int idx = 0;
+    idx = 0;
     while (token != NULL)
     {
         switch (idx) {
             case 0:
                 temp->id = atoi(token);
-//                printf("%d\n", temp->id);
                 break;
             case 1:
                 temp->source = atoi(token);
@@ -39,17 +34,15 @@ edge *edge_create(char *line) {
             case 2:
                 temp->target = atoi(token);
 
-            case 3:
-                if (strstr(token, DELIM_2)){
+            case 3: {
+                if (strstr(token, DELIM_2)) {
                     char *tok = strtok(token, DELIM_2);
                     temp->capacity = atoi(tok);
-                }
-                else {
+                } else {
                     temp->capacity = atoi(token);
                 }
                 break;
-            default:
-                break;
+            }
         }
 
         if (idx == 3){
@@ -61,9 +54,6 @@ edge *edge_create(char *line) {
         token = strtok(NULL, DELIM);
     }
 
-//    if (temp->id > ) {
-//        printf("%s\n",temp->description);
-//    }
     return temp;
 }
 
@@ -73,7 +63,6 @@ void edge_destroy(edge **poor){
     }
 
     free((*poor)->description);
-//    (*poor)->description = NULL;
 
     (*poor)->id = 0;
     (*poor)->target = 0;
@@ -85,9 +74,8 @@ void edge_destroy(edge **poor){
 }
 
 edge *find_edge_by_id(const vector_t *vec, int id) {
-    int i;
+    size_t i;
     for (i = 0; i < vector_count(vec); ++i) {
-        int x = (*(edge **)vector_at(vec, i))->id;
         if ((*(edge **)vector_at(vec, i))->id == id) {
             return (*(edge **)vector_at(vec, i));
         }

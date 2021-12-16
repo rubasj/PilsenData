@@ -1,7 +1,3 @@
-//
-// Created by janru on 02.12.2021.
-//
-
 #include "algorithm.h"
 
 
@@ -10,18 +6,20 @@
 residual graph. Also fills parent[] to store the path */
 int bfs(matrix *rGraph, const int s, const int t, int *parent)
 {
-
-    if (!rGraph, !parent) {
+    int visited[rGraph->cols], u;
+    size_t i;
+    queue *q;
+    if (!rGraph || !parent) {
         printf("BFS: Missing function argument.");
         return 0;
     }
     /* vytvoreni pole prozkoumanych uzlu */
-    int visited[rGraph->cols];
+
     memset(visited, 0, sizeof(visited));
 
     /* Vytvoreni fronty, vlozeni zdrojoveho uzlu a oznaceni zdroje jako proykoumane */
 
-    queue *q;
+
     q = createQueue(4);
     push(q, s);
     visited[s] = 1;
@@ -29,16 +27,16 @@ int bfs(matrix *rGraph, const int s, const int t, int *parent)
 
     while (!isEmpty(q))
     {
-        int u = front(q);
+        u = front(q);
         pop(q);
 
-        for (int v=0; v < rGraph->cols; v++)
+        for (i = 0; i < rGraph->cols; i++)
         {
-            if (visited[v]== 0 && matrix_get_item(rGraph, u, v) > 0)
+            if (visited[i] == 0 && matrix_get_item(rGraph, u, i) > 0)
             {
-                push(q, v);
-                parent[v] = u;
-                visited[v] = 1;
+                push(q, i);
+                parent[i] = u;
+                visited[i] = 1;
             }
         }
     }
@@ -48,46 +46,50 @@ int bfs(matrix *rGraph, const int s, const int t, int *parent)
     return visited[t];
 }
 
-// A DFS based function to find all reachable vertices from s. The function
-// marks visited[i] as true if i is reachable from s. The initial values in
-// visited[] must be false. We can also use BFS to find reachable vertices
+/* A DFS based function to find all reachable vertices from s. The function
+   marks visited[i] as true if i is reachable from s. The initial values in
+   visited[] must be false. We can also use BFS to find reachable vertices */
 void dfs(matrix *rGraph, int s, int *visited)
 {
-    if (!rGraph, !visited) {
+    size_t i;
+    if (!rGraph || !visited) {
         printf("DFS: Missing function argument.");
         return;
     }
     visited[s] = 1;
-    for (int i = 0; i < rGraph->cols; i++)
+    for (i = 0; i < rGraph->cols; i++)
         if (matrix_get_item(rGraph, s, i) && !visited[i])
             dfs(rGraph, i, visited);
 }
 
 int min(int x, int y) {
-return x < y ? x : y;
+    return x < y ? x : y;
 }
 
-// Prints the minimum s-t cut
+
 int ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int out_active, vector_t *min_cut) {
+    matrix *rGraph;
+    int parent[graph->cols], max_flow, path_flow, visited[rGraph->cols], tmp, edge_id, u, v;
+    size_t i, j;
+
 
     if (!graph || s == -1 || t == -1) {
         printf("Ford_fulkerson: Missing argument.");
         return 0;
     }
-    int u, v;
 
-    // Create a residual graph and fill the residual graph with
+
+    /* Create a residual graph and fill the residual graph with
     // given capacities in the original graph as residual capacities
-    // in residual graph
-    matrix *rGraph;
+    // in residual graph */
+
     rGraph = matrix_duplicate(graph);
 
-    int parent[rGraph->cols];
-    int max_flow = 0;
+    max_flow = 0;
 
     while (bfs(rGraph, s, t, parent)) {
 
-        int path_flow = INT_MAX;
+        path_flow = INT_MAX;
         for (v = t; v != s; v = parent[v]) {
             u = parent[v];
             path_flow = min(path_flow, matrix_get_item(rGraph, u, v));
@@ -99,7 +101,7 @@ int ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int 
             matrix_set(rGraph, v, u, (matrix_get_item(rGraph, v, u) + path_flow));
         }
 
-        max_flow += path_flow; // There is no flow initially
+        max_flow += path_flow; /* There is no flow initially*/
     }
     printf("\n");
 
@@ -107,20 +109,26 @@ int ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int 
 
     printf("Max network flow is |x| = %d.\n", max_flow);
 
-    // Flow is maximum now, find vertices reachable from s
-    int visited[rGraph->cols];
-    memset(visited, 0, sizeof(visited));
-    dfs(rGraph, s, visited);
 
-    int edge_id;
-    // Print all edges that are from a reachable vertex to
-    // non-reachable vertex in the original graph
-    for (int i = 0; i < rGraph->cols; i++) {
-        for (int j = 0; j < rGraph->cols; j++) {
+    if (out_active == 1) {
+        /* Flow is maximum now, find vertices reachable from s */
+        memset(visited, 0, sizeof(visited));
+        dfs(rGraph, s, visited);
 
-            if (visited[i] && !visited[j] && matrix_get_item(graph, i, j)) {
-                edge_id = matrix_get_item(m_edges, i, j);
-                int tmp = vector_push_back(min_cut, &edge_id);
+        /* Print all edges that are from a reachable vertex to
+        // non-reachable vertex in the original graph */
+        for (i = 0; i < rGraph->cols; i++) {
+            for (j = 0; j < rGraph->cols; j++) {
+
+                if (visited[i] && !visited[j] && matrix_get_item(graph, i, j)) {
+                    edge_id = matrix_get_item(m_edges, i, j);
+                    tmp = vector_push_back(min_cut, &edge_id);
+
+                    if (tmp == -1) {
+                        printf("Ford_Fulekrson: Nepodarilo se vlozit id hrany do vektoru.\n");
+                        return -1;
+                    }
+                }
             }
         }
     }

@@ -239,7 +239,7 @@ vector_t * load_edges(const char *file_name, const int switcher) {
  */
 int main(int argc, char **argv) {
     /* pokud je switcher == 1, budeme brat taky jeste neexistujici useky silnic */
-    int switcher, out_active, source_id, target_id, sink, i, source, result;
+    int switcher, out_active, source_id, target_id, i, result, sink, source;
     char *vertex_file, *edge_file, *output_file;
     vector_t *list_vertexes, *min_cut, *list_edges;
     matrix *m_capacities, *m_edges;
