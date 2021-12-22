@@ -10,7 +10,7 @@
 typedef struct queue_ {
     int front, rear, size;
     int capacity;
-    int* array;
+    int *array;
 } queue;
 
 queue *createQueue(int capacity);
@@ -19,5 +19,5 @@ void pop(queue* queue);
 int isEmpty(const queue* queue);
 int front(queue* queue);
 int rear(queue* queue);
-void free_queue(queue *queue);
+void free_queue(queue **poor);
 #endif

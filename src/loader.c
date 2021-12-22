@@ -9,6 +9,13 @@
 #define LINE_LEN 8192
 #define DELIMITER ","
 #define CSV ".csv"
+#define EMPTY_INT -1
+#define INVALID_VERTEX_FILE 1
+#define INVALID_EDGE_FILE 2
+#define INVALID_SOURCE_VERTEX 3
+#define INVALID_SINK_VERTEX 4
+#define INVALID_OUTPUT_FILE 5
+#define EMPTY_MAX_FLOW 6
 
 
 /**
@@ -25,7 +32,7 @@ int print_output(const vector_t *edges, const vector_t *min_cut, const char *fil
     int id;
 
     if (!edges || !min_cut || !file || strstr(file, CSV) == NULL) {
-        return 0;
+        return INVALID_OUTPUT_FILE;
     }
 
     fw = fopen(file, "w");
@@ -35,7 +42,7 @@ int print_output(const vector_t *edges, const vector_t *min_cut, const char *fil
     /* zjisteni zda se soubor pro zapis otevrel */
     if (fw == NULL) {
         printf("Vystupni soubor se nepodarilo otevrit");
-        return 0;
+        return INVALID_OUTPUT_FILE;
     }
 
 
@@ -44,13 +51,16 @@ int print_output(const vector_t *edges, const vector_t *min_cut, const char *fil
         id = *(int *)vector_at(min_cut, i);
         e = find_edge_by_id(edges, id);
 
-        fputs(e->description, fw);
 
+        fputs(e->description, fw);
+/*        edge_destroy(&e); */
     }
+
+
     /* Uzavreni souboru  fw */
     if (fclose(fw) == EOF) {
         printf("Soubor pro zapis se nepodarilo uzavrit (fsm.c)");
-        return 0;
+        return INVALID_OUTPUT_FILE;
     }
 
     return 1;
@@ -244,13 +254,17 @@ int main(int argc, char **argv) {
     vector_t *list_vertexes, *min_cut, *list_edges;
     matrix *m_capacities, *m_edges;
 
-    if (argc <= 9) {
-        printf("Usage: Missing arguments.");
-        return EXIT_FAILURE;
-    }
 
-    out_active = 0;
-    switcher = 0;
+#define CLEAR                    \
+    vector_destroy(&list_vertexes);\
+    vector_destroy(&list_edges);   \
+    matrix_free(&m_edges);         \
+    matrix_free(&m_capacities);    \
+    vector_destroy(&min_cut);
+
+
+    out_active = EMPTY_INT;
+    switcher = EMPTY_INT;
     /* argv[0] vzdy obsahuje nazev binarniho souboru */
     for (i = 1; i < argc; i++) {
 
@@ -289,27 +303,29 @@ int main(int argc, char **argv) {
         }
     }
 
-    if (!vertex_file || !edge_file || (!output_file && out_active != 0)){
+
+
+    if (!vertex_file || !edge_file || (!output_file && out_active == EMPTY_INT)){
         printf("Missing arguments.\n");
         return EXIT_FAILURE;
     }
 
 
 
+
     list_vertexes = load_vertexes(vertex_file);
     if (!list_vertexes) {
-        vector_destroy(&list_vertexes);
+        CLEAR
         printf("Invalid vertex file.\n");
-        return 1; /* dle zadani */
+        return INVALID_VERTEX_FILE; /* dle zadani */
     }
 
     list_edges = load_edges(edge_file, switcher);
 
     if (!list_edges) {
-        vector_destroy(&list_vertexes);
-        vector_destroy(&list_edges);
+        CLEAR
         printf("Invalid edges file.\n");
-        return 6; /*dle zadani*/
+        return INVALID_EDGE_FILE; /*dle zadani*/
     }
 
     /* vytvoreni matic obsahujici id a kapacity hran v grafu */
@@ -317,8 +333,7 @@ int main(int argc, char **argv) {
     m_capacities = matrix_create(vector_count(list_vertexes), vector_count(list_vertexes), 0); /* 0 neni zadna kapacita (neexistuje uzel) */
 
     if (!m_capacities || !m_edges) {
-        vector_destroy(&list_vertexes);
-        vector_destroy(&list_edges);
+        CLEAR
         printf("Matrix not created.");
         return EXIT_FAILURE;
     }
@@ -326,20 +341,20 @@ int main(int argc, char **argv) {
 
     sink = get_vertex_position(list_vertexes, target_id);
     if (sink < 0) {
-
+        CLEAR
         printf("Invalid sink vertex.\n");
-        return 4; /* dle zadani */
+        return INVALID_SINK_VERTEX;
     }
 
-    matrix_fill_edges(m_capacities, m_edges, list_vertexes, list_edges);
+
 
     source = get_vertex_position(list_vertexes, source_id);
     if (source < 0) {
-
-
+        CLEAR
         printf("Invalid source vertex.\n");
-        return 3; /* dle zadani */
+        return INVALID_SOURCE_VERTEX;
     }
+    matrix_fill_edges(m_capacities, m_edges, list_vertexes, list_edges);
 
     /* uloziste hran minimalniho rezu */
     min_cut = vector_create(sizeof(int *), NULL);
@@ -349,33 +364,20 @@ int main(int argc, char **argv) {
 
     /* pokud v siti neexistuje tok nenulove velikosti program konci 6 */
     if (result <= 0) {
+        CLEAR
 
-        vector_destroy(&list_vertexes);
-        vector_destroy(&list_edges);
-        matrix_free(&m_edges);
-        matrix_free(&m_capacities);
-        vector_destroy(&min_cut);
-
-        return 6; /* dle zadani */
+        return EMPTY_MAX_FLOW;
     }
     /* pokud je output v parametrech, udela zapis do souboru */
     if (out_active == 1) {
         if (print_output(list_edges, min_cut, output_file) == 0) {
-            vector_destroy(&list_vertexes);
-            vector_destroy(&list_edges);
-            matrix_free(&m_edges);
-            matrix_free(&m_capacities);
-            vector_destroy(&min_cut);
-            return 5;
+            CLEAR
+            return INVALID_OUTPUT_FILE;
         }
     }
 
 
-    vector_destroy(&list_vertexes);
-    vector_destroy(&list_edges);
-    matrix_free(&m_edges);
-    matrix_free(&m_capacities);
-    vector_destroy(&min_cut);
+    CLEAR
 
     return EXIT_SUCCESS;
 }

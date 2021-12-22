@@ -75,8 +75,18 @@ int rear(queue* queue)
 }
 
 
-void free_queue(queue *queue) {
+void free_queue(queue **poor) {
+    if (!poor || !*poor)
+        return;
 
-    free(queue->array);
-    free(queue);
+    (*poor)->front = 0;
+    (*poor)->capacity = 0;
+    (*poor)->size = 0;
+    (*poor)->rear = 0;
+
+    free((*poor)->array);
+    (*poor)->array = NULL;
+
+    free(*poor);
+    *poor = NULL;
 }

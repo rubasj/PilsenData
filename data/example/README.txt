@@ -12,7 +12,7 @@ Invalid sink vertex.
 Invalid sink vertex.
 > flow.exe -s 0 -t 6 -v example_nodes.csv -e example_edges.csv
 Max network flow is |x| = 4.
-> flow.exe -v example_nodes.csv -s 0 -e example_edges.csv -t 6 -a
+> flow.exe -v data/example/example_nodes.csv -s 0 -e data/example/example_edges.csv -t 6 -a
 Max network flow is |x| = 9.
 >
 

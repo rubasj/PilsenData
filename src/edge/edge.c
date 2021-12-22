@@ -7,7 +7,7 @@
 
 edge *edge_create(char *line) {
     edge *temp = NULL;
-    char *token;
+    char *token = NULL;
     int idx;
 
     if (!line) {
@@ -17,6 +17,8 @@ edge *edge_create(char *line) {
     if (!temp) {
         return NULL;
     }
+
+    temp->description = (char *) malloc(sizeof(char *) * strlen(line));
     memset(temp->description, 0, strlen(temp->description));
     memcpy(temp->description, line, strlen(line));
     token = strtok(line, DELIM);
@@ -54,6 +56,8 @@ edge *edge_create(char *line) {
         token = strtok(NULL, DELIM);
     }
 
+    free(token);
+    token = NULL;
     return temp;
 }
 
@@ -63,7 +67,7 @@ void edge_destroy(edge **poor){
     }
 
     free((*poor)->description);
-
+    (*poor)->description = NULL;
     (*poor)->id = 0;
     (*poor)->target = 0;
     (*poor)->source = 0;

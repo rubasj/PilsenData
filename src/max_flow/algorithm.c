@@ -41,7 +41,7 @@ int bfs(matrix *rGraph, const int s, const int t, int *parent)
         }
     }
 
-    free_queue(q);
+    free_queue(&q);
     /* pokud dosahne stoku v BFS ze zdroje oznaci jako 1, jinak 0 */
     return visited[t];
 }
@@ -69,7 +69,7 @@ int min(int x, int y) {
 
 int ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int out_active, vector_t *min_cut) {
     matrix *rGraph;
-    int parent[graph->cols], max_flow, path_flow, visited[rGraph->cols], tmp, edge_id, u, v;
+    int *parent, max_flow, path_flow, *visited, tmp, edge_id, u, v;
     size_t i, j;
 
 
@@ -77,6 +77,10 @@ int ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int 
         printf("Ford_fulkerson: Missing argument.");
         return 0;
     }
+
+
+    parent = (int *) malloc(graph->cols * sizeof(int));
+    visited =(int *) malloc(graph->cols * sizeof(int));
 
 
     /* Create a residual graph and fill the residual graph with
@@ -134,7 +138,10 @@ int ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int 
     }
 
 
-
+    free(parent);
+    parent = NULL;
+    free(visited);
+    visited = NULL;
     matrix_free(&rGraph);
 
     return max_flow;

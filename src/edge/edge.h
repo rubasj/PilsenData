@@ -12,7 +12,7 @@ typedef struct edge_{
     int source;  /* pocatecni vrchol */
     int target;
     int capacity;
-    char description[8192];
+    char *description;
 } edge;
 
 /**

@@ -6,9 +6,9 @@ LDFLAGS = $(CFLAGS) -lm
 BUILD_DIR = build
 BIN = flow.exe
 
-all: clean $(BUILD_DIR) $(BUILD_DIR)/$(BIN)
+all: clean $(BUILD_DIR) $(BIN)
 
-$(BUILD_DIR)/$(BIN): $(BUILD_DIR)/loader.o $(BUILD_DIR)/matrix.o $(BUILD_DIR)/edge.o $(BUILD_DIR)/algorithm.o $(BUILD_DIR)/queue.o $(BUILD_DIR)/vector.o
+$(BIN): $(BUILD_DIR)/loader.o $(BUILD_DIR)/matrix.o $(BUILD_DIR)/edge.o $(BUILD_DIR)/algorithm.o $(BUILD_DIR)/queue.o $(BUILD_DIR)/vector.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 # Návod na přeložení modulů.
@@ -30,11 +30,12 @@ $(BUILD_DIR)/queue.o: src/queue/queue.c
 $(BUILD_DIR)/vector.o: src/vector/vector.c src/vector/vector.h
 	$(CC) -c $(CFLAGS) -o $@ $<
 
-#$(BUILD_DIR)/matrix.o: src/matrix/matrix.c src/matrix/matrix.h
-#	$(CC) -c $(CFLAGS) -o $@ $<
 
 $(BUILD_DIR):
 	mkdir $@
-# Na linuxu je rm!
+
 clean:
+#	rm -f -r  $(BUILD_DIR)
+#	rm -f -r  $(BIN)
+	del /F /Q $(BIN)
 	del /F /Q $(BUILD_DIR)
