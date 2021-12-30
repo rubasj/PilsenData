@@ -6,7 +6,7 @@
 residual graph. Also fills parent[] to store the path */
 int bfs(matrix *rGraph, const int s, const int t, int *parent)
 {
-    int visited[rGraph->cols], u;
+    int *visited, u;
     size_t i;
     queue *q;
     if (!rGraph || !parent) {
@@ -14,8 +14,13 @@ int bfs(matrix *rGraph, const int s, const int t, int *parent)
         return 0;
     }
     /* vytvoreni pole prozkoumanych uzlu */
+     visited = (int *)malloc(rGraph->cols * sizeof(int)); /* kontrola alokace**/
+    if (!visited) {
+        printf("BFS: Malloc fault.");
+        return -1;
+    }
 
-    memset(visited, 0, sizeof(visited));
+     memset(visited, 0, rGraph->cols * sizeof(int));
 
     /* Vytvoreni fronty, vlozeni zdrojoveho uzlu a oznaceni zdroje jako proykoumane */
 
@@ -41,9 +46,16 @@ int bfs(matrix *rGraph, const int s, const int t, int *parent)
         }
     }
 
+    if (visited[t] == 1) {
+        free(visited);
+        free_queue(&q);
+        return 1;
+    }
+
+    free(visited);
     free_queue(&q);
-    /* pokud dosahne stoku v BFS ze zdroje oznaci jako 1, jinak 0 */
-    return visited[t];
+/* pokud dosahne stoku v BFS ze zdroje oznaci jako 1, jinak 0 */
+    return 0;
 }
 
 /* A DFS based function to find all reachable vertices from s. The function
@@ -82,6 +94,12 @@ int ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int 
     parent = (int *) malloc(graph->cols * sizeof(int));
     visited =(int *) malloc(graph->cols * sizeof(int));
 
+    if (!visited || !parent) {
+        printf("Ford_fulkerson: Malloc fault.");
+        return -1;
+    }
+    memset(visited, 0, graph->cols * sizeof(int));
+    memset(parent, 0, graph->cols * sizeof(int));
 
     /* Create a residual graph and fill the residual graph with
     // given capacities in the original graph as residual capacities
@@ -111,12 +129,12 @@ int ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int 
 
 
 
-    printf("Max network flow is |x| = %d.\n", max_flow);
+
 
 
     if (out_active == 1) {
         /* Flow is maximum now, find vertices reachable from s */
-        memset(visited, 0, sizeof(visited));
+
         dfs(rGraph, s, visited);
 
         /* Print all edges that are from a reachable vertex to
@@ -129,7 +147,7 @@ int ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int 
                     tmp = vector_push_back(min_cut, &edge_id);
 
                     if (tmp == -1) {
-                        printf("Ford_Fulekrson: Nepodarilo se vlozit id hrany do vektoru.\n");
+                        printf("Ford_Fulekrson: vector push back fault.\n");
                         return -1;
                     }
                 }
