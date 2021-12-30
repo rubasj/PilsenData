@@ -11,4 +11,8 @@
 int min(int x, int y);
 int bfs(matrix *rGraph, const int s, const int t, int *parent);
 int ford_fulkerson(const matrix *graph, const matrix *m_edges, int s, int t, int out_active, vector_t *min_cut);
+
+void sort_mincut_id(vector_t *pVector);
+
+void swap(int *a, int *b);
 #endif

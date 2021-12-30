@@ -29,4 +29,5 @@ void edge_destroy(edge **poor);
 
 edge *find_edge_by_id(const vector_t *vec, int id);
 
+
 #endif

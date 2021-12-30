@@ -16,6 +16,18 @@ stdlib.h
 ../vector/vector.h
 E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/vector/vector.h
 
+E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/loader.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+matrix/matrix.h
+E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/matrix/matrix.h
+max_flow/algorithm.h
+E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/max_flow/algorithm.h
+
 E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/matrix/matrix.h
 stdlib.h
 -
@@ -27,10 +39,6 @@ stddef.h
 E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/edge/edge.h
 ../vector/vector.h
 E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/vector/vector.h
-
-E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/max_flow/algorithm.c
-algorithm.h
-E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/max_flow/algorithm.h
 
 E:/SKOLA_ZCU/4. rocnik/KIV_PC/PilsenData/src/max_flow/algorithm.h
 limits.h

@@ -19,7 +19,7 @@ edge *edge_create(char *line) {
     }
 
     temp->description = (char *) malloc(sizeof(char *) * strlen(line));
-    memset(temp->description, 0, strlen(temp->description));
+    memset(temp->description, 0, strlen(line));
     memcpy(temp->description, line, strlen(line));
     token = strtok(line, DELIM);
 
@@ -35,6 +35,7 @@ edge *edge_create(char *line) {
                 break;
             case 2:
                 temp->target = atoi(token);
+                break;
 
             case 3: {
                 if (strstr(token, DELIM_2)) {
@@ -56,7 +57,6 @@ edge *edge_create(char *line) {
         token = strtok(NULL, DELIM);
     }
 
-    free(token);
     token = NULL;
     return temp;
 }
@@ -79,6 +79,10 @@ void edge_destroy(edge **poor){
 
 edge *find_edge_by_id(const vector_t *vec, int id) {
     size_t i;
+
+    if (!vec)
+        return NULL;
+
     for (i = 0; i < vector_count(vec); ++i) {
         if ((*(edge **)vector_at(vec, i))->id == id) {
             return (*(edge **)vector_at(vec, i));
@@ -86,3 +90,9 @@ edge *find_edge_by_id(const vector_t *vec, int id) {
     }
     return NULL;
 }
+
+
+
+
+
+

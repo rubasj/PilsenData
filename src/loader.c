@@ -16,6 +16,11 @@
 #define INVALID_SINK_VERTEX 4
 #define INVALID_OUTPUT_FILE 5
 #define EMPTY_MAX_FLOW 6
+#define EDGES_HEADER "id,source,target,capacity,isvalid,WKT"
+#define VERTICES_HEADER "id,WKT"
+/* Kontrola pro funkce, ktere vraci hodnoty a nemaji pridelene ukonceni programu dle zadani*/
+#define FUNCTION_FAILURE 1
+#define FUNCTION_OK 0
 
 
 /**
@@ -36,8 +41,6 @@ int print_output(const vector_t *edges, const vector_t *min_cut, const char *fil
     }
 
     fw = fopen(file, "w");
-
-
 
     /* zjisteni zda se soubor pro zapis otevrel */
     if (fw == NULL) {
@@ -63,28 +66,28 @@ int print_output(const vector_t *edges, const vector_t *min_cut, const char *fil
         return INVALID_OUTPUT_FILE;
     }
 
-    return 1;
+    return FUNCTION_OK;
 }
 
 /**
  * Kontrola zda uzel jiz existuje
- * @param vertexes vektor uzlu
+ * @param vertices vektor uzlu
  * @param id
  * @return
  */
-int check_vector_vertex_duplicates(const vector_t *vertexes, const int id) {
+int check_vector_vertex_duplicates(const vector_t *vertices, const int id) {
     size_t i;
 
-    if (!vertexes) {
-        return -1;
+    if (!vertices) {
+        return FUNCTION_FAILURE;
     }
-    for (i = 0; i < vector_count(vertexes); ++i) {
+    for (i = 0; i < vector_count(vertices); ++i) {
 
-        if (*(int *)vector_at(vertexes, i) == id){
-            return 1;
+        if (*(int *)vector_at(vertices, i) == id){
+            return FUNCTION_FAILURE;
         }
     }
-    return 0;
+    return FUNCTION_OK;
 }
 
 /**
@@ -97,16 +100,16 @@ int check_vector_edge_duplicates(const vector_t *edges, const int id) {
     size_t i;
 
     if (!edges) {
-        return -1;
+        return FUNCTION_FAILURE;
     }
 
     for (i = 0; i < vector_count(edges); ++i) {
 
         if ((*(edge **)vector_at(edges, i))->id == id){
-            return 1;
+            return FUNCTION_FAILURE;
         }
     }
-    return 0;
+    return FUNCTION_OK;
 }
 
 /**
@@ -114,13 +117,18 @@ int check_vector_edge_duplicates(const vector_t *edges, const int id) {
  * @param file_name nazev souboru
  * @return pointer na vector uzlu
  */
-vector_t *load_vertexes(const char *file_name) {
+vector_t *load_vertices(const char *file_name) {
     /* Souborovy vstup/vystup */
     FILE *fr;
-    char line[LINE_LEN];
+    char *line;
     /* pole vsech uzlu, defaultne nastaveno na "4" prvky, bude se zvetsovat*/
-    vector_t *vertexes;
+    vector_t *vertices;
 
+    line = (char *) malloc(LINE_LEN * sizeof(char));
+    if (!line) {
+        return NULL;
+    }
+    memset(line, 0, LINE_LEN * sizeof(char));
     if (!file_name || strstr(file_name, CSV) == NULL) {
         return NULL;
     }
@@ -131,20 +139,29 @@ vector_t *load_vertexes(const char *file_name) {
         return NULL;
     }
 
-    vertexes = vector_create(sizeof(int *), NULL);
-    if (!vertexes) {
-        vector_destroy(&vertexes);
+    vertices = vector_create(sizeof(int *), NULL);
+    if (!vertices) {
+        vector_destroy(&vertices);
         fclose(fr);
         return NULL;
     }
 
     /* vynulovani znaku v pameti "line" */
-    memset(line, 0, LINE_LEN);
+    memset(line, 0, LINE_LEN * sizeof(char));
 
+    if (fgets(line, LINE_LEN, fr)) {
+        if (strstr(line, VERTICES_HEADER) == NULL) {
+            vector_destroy(&vertices);
+            free(line);
+            return NULL;
+        }
+    }
+    memset(line, 0, LINE_LEN * sizeof(char));
     while (fgets(line, LINE_LEN, fr)) {
 
+
         /* pokud line obsahuje "id", automaticky se rozumi, ze jde o prvni radku, rovnou se preskoci */
-        if (strstr(line, "id") == NULL){
+        if (strstr(line, VERTICES_HEADER) == NULL){
             char *token;
 
             token = strtok(line, DELIMITER);
@@ -152,10 +169,10 @@ vector_t *load_vertexes(const char *file_name) {
                 int tmp , check;
                 tmp = atoi(token);
 
-                check = check_vector_vertex_duplicates(vertexes, tmp);
+                check = check_vector_vertex_duplicates(vertices, tmp);
                 if (check == 0){
-                    if (vector_push_back(vertexes, &tmp) == INVALID_INDEX) {
-                        vector_destroy(&vertexes);
+                    if (vector_push_back(vertices, &tmp) == INVALID_INDEX) {
+                        vector_destroy(&vertices);
                         fclose(fr);
                         return NULL;
                     }
@@ -164,9 +181,10 @@ vector_t *load_vertexes(const char *file_name) {
             }
 
         }
-        memset(line, 0, LINE_LEN);
+        memset(line, 0, LINE_LEN * sizeof(char));
     }
 
+    free(line);
     if (fclose(fr) == EOF)
     {
         printf("Soubor pro cteni se nepodarilo uzavrit.");
@@ -174,7 +192,7 @@ vector_t *load_vertexes(const char *file_name) {
     }
 
 
-    return vertexes;
+    return vertices;
 
 }
 
@@ -184,21 +202,27 @@ vector_t *load_vertexes(const char *file_name) {
  * @param switcher 0 - pokud akceptuje jen True hrany, 1 - pokud akceptuje vsechny
  * @return vrati pointer na vector hran
  */
-vector_t * load_edges(const char *file_name, const int switcher) {
+vector_t *load_edges(const char *file_name, const int switcher) {
     /* Souborovy vstup/vystup */
     FILE *fr;
-    char line[LINE_LEN];
+    char *line;
     edge *e;
-
     vector_t *temps;
 
     if (!file_name || strstr(file_name, CSV) == NULL) {
         return NULL;
     }
 
-    memset(line, 0, LINE_LEN);
+    line = (char *) malloc(LINE_LEN * sizeof(char));
+
+    if (!line) {
+        return NULL;
+    }
+
+    memset(line, 0, LINE_LEN * sizeof(char));
 
     temps = vector_create(sizeof(edge *), (vec_it_dealloc_t)edge_destroy);
+
     if(!temps) {
         return NULL;
     }
@@ -209,11 +233,23 @@ vector_t * load_edges(const char *file_name, const int switcher) {
         return NULL;
     }
 
+    if (fgets(line, LINE_LEN, fr)) {
+        if (strstr(line, EDGES_HEADER) == NULL) {
+            vector_destroy(&temps);
+            free(line);
+            return NULL;
+        }
+    }
+
+    memset(line, 0, LINE_LEN * sizeof(char));
     while (fgets(line, LINE_LEN, fr)) {
+
+
         /* pokud line obsahuje "id", automaticky se rozumi, ze jde o prvni radku, rovnou se preskoci */
-        if (strstr(line, "id,source") == NULL) {
+        if (strstr(line, EDGES_HEADER) == NULL) {
             if (switcher == 0 &&
             strstr(line, "False" ) != NULL){
+                memset(line, 0, LINE_LEN * sizeof(char));
                 continue;
             }
             e = edge_create(line);
@@ -228,8 +264,10 @@ vector_t * load_edges(const char *file_name, const int switcher) {
             }
 
         }
-
+        memset(line, 0, LINE_LEN * sizeof(char));
     }
+
+    free(line);
 
     if (fclose(fr) == EOF)
     {
@@ -251,12 +289,12 @@ int main(int argc, char **argv) {
     /* pokud je switcher == 1, budeme brat taky jeste neexistujici useky silnic */
     int switcher, out_active, source_id, target_id, i, result, sink, source;
     char *vertex_file, *edge_file, *output_file;
-    vector_t *list_vertexes, *min_cut, *list_edges;
+    vector_t *list_vertices, *min_cut, *list_edges;
     matrix *m_capacities, *m_edges;
 
 
 #define CLEAR                    \
-    vector_destroy(&list_vertexes);\
+    vector_destroy(&list_vertices);\
     vector_destroy(&list_edges);   \
     matrix_free(&m_edges);         \
     matrix_free(&m_capacities);    \
@@ -268,6 +306,7 @@ int main(int argc, char **argv) {
     /* argv[0] vzdy obsahuje nazev binarniho souboru */
     for (i = 1; i < argc; i++) {
 
+        printf("%s \n",argv[i]);
         /* nacitani souboru s uzly */
         if (strcmp(argv[i], "-v") == 0) {
             vertex_file = argv[i + 1];
@@ -303,19 +342,8 @@ int main(int argc, char **argv) {
         }
     }
 
-
-
-    if (!vertex_file || !edge_file || (!output_file && out_active == EMPTY_INT)){
-        printf("Missing arguments.\n");
-        return EXIT_FAILURE;
-    }
-
-
-
-
-    list_vertexes = load_vertexes(vertex_file);
-    if (!list_vertexes) {
-        CLEAR
+    list_vertices = load_vertices(vertex_file);
+    if (!list_vertices) {
         printf("Invalid vertex file.\n");
         return INVALID_VERTEX_FILE; /* dle zadani */
     }
@@ -323,38 +351,53 @@ int main(int argc, char **argv) {
     list_edges = load_edges(edge_file, switcher);
 
     if (!list_edges) {
-        CLEAR
+        vector_destroy(&list_vertices);
         printf("Invalid edges file.\n");
         return INVALID_EDGE_FILE; /*dle zadani*/
     }
 
     /* vytvoreni matic obsahujici id a kapacity hran v grafu */
-    m_edges = matrix_create(vector_count(list_vertexes), vector_count(list_vertexes), -1); /* -1 hrana mezi nody neexistuje */
-    m_capacities = matrix_create(vector_count(list_vertexes), vector_count(list_vertexes), 0); /* 0 neni zadna kapacita (neexistuje uzel) */
+    m_edges = matrix_create(vector_count(list_vertices), vector_count(list_vertices), -1); /* -1 hrana mezi nody neexistuje */
+    if (!m_edges) {
+        vector_destroy(&list_edges);
+        vector_destroy(&list_vertices);
 
-    if (!m_capacities || !m_edges) {
-        CLEAR
+        printf("Matrix not created.");
+        return EXIT_FAILURE;
+    }
+    m_capacities = matrix_create(vector_count(list_vertices), vector_count(list_vertices), 0); /* 0 neni zadna kapacita (neexistuje uzel) */
+
+    if (!m_capacities) {
+        matrix_free(&m_edges);
+        vector_destroy(&list_edges);
+        vector_destroy(&list_vertices);
         printf("Matrix not created.");
         return EXIT_FAILURE;
     }
 
 
-    sink = get_vertex_position(list_vertexes, target_id);
+    sink = get_vertex_position(list_vertices, target_id);
     if (sink < 0) {
-        CLEAR
+        matrix_free(&m_capacities);
+        matrix_free(&m_edges);
+        vector_destroy(&list_edges);
+        vector_destroy(&list_vertices);
         printf("Invalid sink vertex.\n");
         return INVALID_SINK_VERTEX;
     }
 
 
 
-    source = get_vertex_position(list_vertexes, source_id);
+    source = get_vertex_position(list_vertices, source_id);
     if (source < 0) {
-        CLEAR
+        matrix_free(&m_capacities);
+        matrix_free(&m_edges);
+        vector_destroy(&list_edges);
+        vector_destroy(&list_vertices);
         printf("Invalid source vertex.\n");
         return INVALID_SOURCE_VERTEX;
     }
-    matrix_fill_edges(m_capacities, m_edges, list_vertexes, list_edges);
+    matrix_fill_edges(m_capacities, m_edges, list_vertices, list_edges);
 
     /* uloziste hran minimalniho rezu */
     min_cut = vector_create(sizeof(int *), NULL);
@@ -370,12 +413,12 @@ int main(int argc, char **argv) {
     }
     /* pokud je output v parametrech, udela zapis do souboru */
     if (out_active == 1) {
-        if (print_output(list_edges, min_cut, output_file) == 0) {
+        if (print_output(list_edges, min_cut, output_file) != EXIT_SUCCESS) {
             CLEAR
             return INVALID_OUTPUT_FILE;
         }
     }
-
+    printf("Max network flow is |x| = %d.\n", result);
 
     CLEAR
 

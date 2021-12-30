@@ -1,4 +1,3 @@
-
 #ifndef PILSENDATA_QUEUE_H
 #define PILSENDATA_QUEUE_H
 
@@ -10,7 +9,7 @@
 typedef struct queue_ {
     int front, rear, size;
     int capacity;
-    int *array;
+    int *data;
 } queue;
 
 queue *createQueue(int capacity);

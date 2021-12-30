@@ -2,6 +2,7 @@
 
 
 
+
 /* Returns true if there is a path from source 's' to sink 't' in
 residual graph. Also fills parent[] to store the path */
 int bfs(matrix *rGraph, const int s, const int t, int *parent)
@@ -153,6 +154,8 @@ int ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int 
                 }
             }
         }
+
+        sort_mincut_id(min_cut);
     }
 
 
@@ -163,5 +166,30 @@ int ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int 
     matrix_free(&rGraph);
 
     return max_flow;
+}
+
+void sort_mincut_id(vector_t *data) {
+    int i, j, n, min_idx;
+
+    n = vector_count(data);
+
+
+    for (i = 0; i < n - 1; i++) {
+
+
+        min_idx = i;
+        for (j = i + 1; j < n; j++)
+            if (*(int *)vector_at(data, j) < *(int *)vector_at(data, min_idx))
+                min_idx = j;
+
+
+        swap(&(*(int *)vector_at(data, min_idx)), &(*(int *)vector_at(data, i)));
+    }
+}
+
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }
 

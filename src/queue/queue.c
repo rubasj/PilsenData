@@ -7,12 +7,14 @@ queue *createQueue(int capacity)
 {
     queue *q;
     q = (queue *) malloc(sizeof(queue));
+    if (!q)
+        return NULL;
     q->capacity = capacity;
     q->front = q->size = 0;
 
     /* This is important, see the push */
     q->rear = capacity - 1;
-    q->array = (int*)malloc(
+    q->data = (int*)malloc(
             q->capacity * sizeof(int));
     return q;
 }
@@ -32,16 +34,23 @@ int isEmpty(const queue* queue)
 
 /*Function to add an item to the queue.
  It changes rear and size */
-void push(queue* queue, int item)
+void push(queue *queue, int item)
 {
+    int *tmp;
+    if (!queue)
+        return;
     if (isFull(queue)) {
         /* pokud je fronta plna, zvetsi se kapacita pole o dvojnasobek */
-        queue->array = (int *) realloc(queue->array, queue->capacity * 2);
+        tmp = (int *) realloc(queue->data, queue->capacity * 2);
+        if (!tmp)
+        {
+            return;
+        }
+        queue->data = tmp;
     }
 
-    queue->rear = (queue->rear + 1)
-                  % queue->capacity;
-    queue->array[queue->rear] = item;
+    queue->rear = (queue->rear + 1) % queue->capacity;
+    queue->data[queue->rear] = item;
     queue->size = queue->size + 1;
 /*    printf("%d enqueued to queue\n", item); */
 }
@@ -61,9 +70,11 @@ void pop(queue* queue)
 /* Function to get front of queue */
 int front(queue* queue)
 {
+    if (!queue)
+        return INT_MIN;
     if (isEmpty(queue))
         return INT_MIN;
-    return queue->array[queue->front];
+    return queue->data[queue->front];
 }
 
 /* Function to get rear of queue */
@@ -71,7 +82,7 @@ int rear(queue* queue)
 {
     if (isEmpty(queue))
         return INT_MIN;
-    return queue->array[queue->rear];
+    return queue->data[queue->rear];
 }
 
 
@@ -84,8 +95,8 @@ void free_queue(queue **poor) {
     (*poor)->size = 0;
     (*poor)->rear = 0;
 
-    free((*poor)->array);
-    (*poor)->array = NULL;
+    free((*poor)->data);
+    (*poor)->data = NULL;
 
     free(*poor);
     *poor = NULL;
