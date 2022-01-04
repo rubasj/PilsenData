@@ -150,17 +150,20 @@ vector_t *load_vertices(const char *file_name) {
     }
     memset(line, 0, LINE_LEN * sizeof(char));
     if (!file_name || strstr(file_name, CSV) == NULL) {
+        free(line);
         return NULL;
     }
 
     /*otevreni souboru*/
     fr = fopen(file_name, "r");
     if (fr == NULL) {
+        free(line);
         return NULL;
     }
 
     vertices = vector_create(sizeof(int *), NULL);
     if (!vertices) {
+        free(line);
         vector_destroy(&vertices);
         fclose(fr);
         return NULL;
@@ -244,6 +247,7 @@ vector_t *load_edges(const char *file_name, const int switcher) {
     temps = vector_create(sizeof(edge *), (vec_it_dealloc_t)edge_destroy);
 
     if(!temps) {
+        free(line);
         return NULL;
     }
 
