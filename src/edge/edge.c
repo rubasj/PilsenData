@@ -19,8 +19,8 @@ edge *edge_create(char *line) {
     }
 
     temp->description = (char *) malloc(sizeof(char *) * strlen(line));
-    memset(temp->description, 0, strlen(line));
-    memcpy(temp->description, line, strlen(line));
+    memset(temp->description, 0, sizeof(char *) * strlen(line));
+    memcpy(temp->description, line, sizeof(char *) * strlen(line));
     token = strtok(line, DELIM);
 
     idx = 0;
