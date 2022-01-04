@@ -88,7 +88,7 @@ edge *find_edge_by_id(const vector_t *vec, int id) {
             return (*(edge **)vector_at(vec, i));
         }
     }
-    return NULL;
+    return NULL; /* pokud neni nalezena, vrati null */
 }
 
 

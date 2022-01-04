@@ -1,0 +1,1 @@
+flow.exe -s 0 -t 6 -e ./data/example/example_edges.csv -v ./data/example/example_nodes.csv -a -out output.csv

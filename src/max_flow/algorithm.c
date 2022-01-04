@@ -23,7 +23,7 @@ int bfs(matrix *rGraph, const int s, const int t, int *parent)
 
      memset(visited, 0, rGraph->cols * sizeof(int));
 
-    /* Vytvoreni fronty, vlozeni zdrojoveho uzlu a oznaceni zdroje jako proykoumane */
+    /* Vytvoreni fronty, vlozeni zdrojoveho uzlu a oznaceni zdroje jako prozkoumane */
 
 
     q = createQueue(4);

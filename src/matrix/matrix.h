@@ -1,5 +1,8 @@
 
-
+/**
+ * Soubor s definici struktury pro matici,  jeji kod je zalozen na kodu ze 6. cviceni,
+ * jediny rozdil je v tom, ze hodnoty v polich jsou signed int.
+ */
 #ifndef PILSENDATA_MATRIX_H
 #define PILSENDATA_MATRIX_H
 
@@ -81,13 +84,16 @@ matrix *matrix_duplicate(const matrix *original);
 
 /**
  * Funkce najde index nodu, kde se nachazi ve vektoru
- * @param vertexes vector vertexes
+ * @param verteces vector verteces
  * @param vertex_id uzel, jehoz index hledame
  * @return kdyz uzel je v zaznamu, vrati se jeho index, jinak -1
  */
-int get_vertex_position(const vector_t *vertexes, const int vertex_id);
+int get_vertex_position(const vector_t *verteces, const int vertex_id);
 
-
+/**
+ * Tisk matice pro kontrolu do konzole (v hotovem programu nepouziva se)
+ * @param m matice pro tisk
+ */
 void matrix_print(const matrix *m);
 #endif
 

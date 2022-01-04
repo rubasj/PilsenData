@@ -74,16 +74,16 @@ void matrix_set(matrix *mat, const size_t row, const size_t col, mat_num_t val) 
 
 }
 
-int get_vertex_position(const vector_t *vertexes, const int vertex_id) {
+int get_vertex_position(const vector_t *verteces, const int vertex_id) {
 
     size_t i;
-    if (!vertexes || !vertex_id){
+    if (!verteces || !vertex_id){
         return 0;
     }
 
 
-    for (i = 0; i < vector_count(vertexes); i++) {
-        if (vertex_id == *(int *)vector_at(vertexes, i)) {
+    for (i = 0; i < vector_count(verteces); i++) {
+        if (vertex_id == *(int *)vector_at(verteces, i)) {
             return i;
         }
     }

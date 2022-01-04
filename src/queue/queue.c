@@ -20,9 +20,10 @@ queue *createQueue(int capacity)
 }
 
 /* Queue is full when size becomes
-// equal to the capacity */
+  equal to the capacity */
 int isFull(queue* queue)
 {
+
     return (queue->size == queue->capacity);
 }
 

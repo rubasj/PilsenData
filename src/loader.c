@@ -1,3 +1,9 @@
+/**
+ * Vychozi soubor celeho projektu
+ * @author Jan Rubas
+ * @email janrubas@students.zcu.cz
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,17 +11,26 @@
 
 #include "max_flow/algorithm.h"
 
-/* Predpokladana maximalni delka radky */
+
+/* Predpokladana maximalni delka radky, kterou lze nacist */
 #define LINE_LEN 8192
+/* oddelovac */
 #define DELIMITER ","
+/* csv koncovka souboru */
 #define CSV ".csv"
+/* pouze indikace, ze promenna je neurcena */
 #define EMPTY_INT -1
+
+
+/* return hodnoty dle zadani, kdyz se vyskytne chyba, detail je v nazvu */
 #define INVALID_VERTEX_FILE 1
 #define INVALID_EDGE_FILE 2
 #define INVALID_SOURCE_VERTEX 3
 #define INVALID_SINK_VERTEX 4
 #define INVALID_OUTPUT_FILE 5
 #define EMPTY_MAX_FLOW 6
+
+/* Hlavicky, ktere musi byt pri nacitani souboru */
 #define EDGES_HEADER "id,source,target,capacity,isvalid,WKT"
 #define VERTICES_HEADER "id,WKT"
 /* Kontrola pro funkce, ktere vraci hodnoty a nemaji pridelene ukonceni programu dle zadani*/
@@ -42,6 +57,9 @@ int print_output(const vector_t *edges, const vector_t *min_cut, const char *fil
 
     fw = fopen(file, "w");
 
+    if (!strstr(file, CSV)) {
+        return INVALID_OUTPUT_FILE;
+    }
     /* zjisteni zda se soubor pro zapis otevrel */
     if (fw == NULL) {
         printf("Vystupni soubor se nepodarilo otevrit");
@@ -49,6 +67,8 @@ int print_output(const vector_t *edges, const vector_t *min_cut, const char *fil
     }
 
 
+    fputs( EDGES_HEADER, fw);
+    fputs( "\n", fw);
     for (i = 0; i < vector_count(min_cut); i++) {
 
         id = *(int *)vector_at(min_cut, i);
@@ -72,8 +92,8 @@ int print_output(const vector_t *edges, const vector_t *min_cut, const char *fil
 /**
  * Kontrola zda uzel jiz existuje
  * @param vertices vektor uzlu
- * @param id
- * @return
+ * @param id identifikator pro porovnani
+ * @return vrati 0, pokud jeste vrchol s timto ID neexistuje, jinak 1
  */
 int check_vector_vertex_duplicates(const vector_t *vertices, const int id) {
     size_t i;
@@ -306,7 +326,7 @@ int main(int argc, char **argv) {
     /* argv[0] vzdy obsahuje nazev binarniho souboru */
     for (i = 1; i < argc; i++) {
 
-        printf("%s \n",argv[i]);
+     /*   printf("%s \n",argv[i]);*/
         /* nacitani souboru s uzly */
         if (strcmp(argv[i], "-v") == 0) {
             vertex_file = argv[i + 1];
