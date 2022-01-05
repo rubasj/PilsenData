@@ -35,7 +35,7 @@ $(BUILD_DIR):
 	mkdir $@
 
 clean:
-#	rm -f -r  $(BUILD_DIR)
-#	rm -f -r  $(BIN)
-	del /F /Q $(BIN)
-	del /F /Q $(BUILD_DIR)
+	rm -f -r  $(BUILD_DIR)
+	rm -f -r  $(BIN)
+#	del /F /Q $(BIN)
+#	del /F /Q $(BUILD_DIR)

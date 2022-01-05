@@ -42,12 +42,13 @@ void push(queue *queue, int item)
         return;
     if (isFull(queue)) {
         /* pokud je fronta plna, zvetsi se kapacita pole o dvojnasobek */
-        tmp = (int *) realloc(queue->data, queue->capacity * 2);
+        tmp = (int *) realloc(queue->data, sizeof(int *) * queue->capacity * 2);
         if (!tmp)
         {
             return;
         }
         queue->data = tmp;
+        queue->capacity = queue->capacity * 2;
     }
 
     queue->rear = (queue->rear + 1) % queue->capacity;

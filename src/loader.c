@@ -18,7 +18,7 @@
 #define DELIMITER ","
 /* csv koncovka souboru */
 #define CSV ".csv"
-/* pouze indikace, ze promenna je neurcena */
+/* pouze indikace, ze promenna z parametru je neurcena */
 #define EMPTY_INT -1
 
 
@@ -176,6 +176,10 @@ vector_t *load_vertices(const char *file_name) {
         if (strstr(line, VERTICES_HEADER) == NULL) {
             vector_destroy(&vertices);
             free(line);
+
+            fclose(fr);
+
+
             return NULL;
         }
     }
@@ -261,6 +265,8 @@ vector_t *load_edges(const char *file_name, const int switcher) {
         if (strstr(line, EDGES_HEADER) == NULL) {
             vector_destroy(&temps);
             free(line);
+
+            fclose(fr);
             return NULL;
         }
     }
@@ -271,7 +277,7 @@ vector_t *load_edges(const char *file_name, const int switcher) {
 
         /* pokud line obsahuje "id", automaticky se rozumi, ze jde o prvni radku, rovnou se preskoci */
         if (strstr(line, EDGES_HEADER) == NULL) {
-            if (switcher == 0 &&
+            if (switcher == EMPTY_INT &&
             strstr(line, "False" ) != NULL){
                 memset(line, 0, LINE_LEN * sizeof(char));
                 continue;
@@ -285,8 +291,9 @@ vector_t *load_edges(const char *file_name, const int switcher) {
             }
             if (check_vector_edge_duplicates(temps, e->id) == 0) {
                 vector_push_back(temps, &e);
+            }else {
+                edge_destroy(&e);
             }
-
         }
         memset(line, 0, LINE_LEN * sizeof(char));
     }
@@ -304,7 +311,6 @@ vector_t *load_edges(const char *file_name, const int switcher) {
 
 
 /**
- * Vychozi funkce programu
  * @param argc pocet zadanych parametru v prikazove radce
  * @param argv pointer na argumenty prikazoveho radku
  * @return vysledek programu
@@ -376,9 +382,26 @@ int main(int argc, char **argv) {
 
     if (!list_edges) {
         vector_destroy(&list_vertices);
-        printf("Invalid edges file.\n");
+        printf("Invalid edge file.\n");
         return INVALID_EDGE_FILE; /*dle zadani*/
     }
+
+    source = get_vertex_position(list_vertices, source_id);
+    if (source < 0) {
+        vector_destroy(&list_edges);
+        vector_destroy(&list_vertices);
+        printf("Invalid source vertex.\n");
+        return INVALID_SOURCE_VERTEX;
+    }
+
+    sink = get_vertex_position(list_vertices, target_id);
+    if (sink < 0 || sink == source) {
+        vector_destroy(&list_edges);
+        vector_destroy(&list_vertices);
+        printf("Invalid sink vertex.\n");
+        return INVALID_SINK_VERTEX;
+    }
+
 
     /* vytvoreni matic obsahujici id a kapacity hran v grafu */
     m_edges = matrix_create(vector_count(list_vertices), vector_count(list_vertices), -1); /* -1 hrana mezi nody neexistuje */
@@ -400,27 +423,6 @@ int main(int argc, char **argv) {
     }
 
 
-    sink = get_vertex_position(list_vertices, target_id);
-    if (sink < 0) {
-        matrix_free(&m_capacities);
-        matrix_free(&m_edges);
-        vector_destroy(&list_edges);
-        vector_destroy(&list_vertices);
-        printf("Invalid sink vertex.\n");
-        return INVALID_SINK_VERTEX;
-    }
-
-
-
-    source = get_vertex_position(list_vertices, source_id);
-    if (source < 0) {
-        matrix_free(&m_capacities);
-        matrix_free(&m_edges);
-        vector_destroy(&list_edges);
-        vector_destroy(&list_vertices);
-        printf("Invalid source vertex.\n");
-        return INVALID_SOURCE_VERTEX;
-    }
     matrix_fill_edges(m_capacities, m_edges, list_vertices, list_edges);
 
     /* uloziste hran minimalniho rezu */
@@ -428,6 +430,7 @@ int main(int argc, char **argv) {
 
     /* result (max flow) */
     result = ford_fulkerson(m_capacities, m_edges, source, sink, out_active, min_cut);
+    printf("Max network flow is |x| = %d.\n", result);
 
     /* pokud v siti neexistuje tok nenulove velikosti program konci 6 */
     if (result <= 0) {
@@ -442,8 +445,7 @@ int main(int argc, char **argv) {
             return INVALID_OUTPUT_FILE;
         }
     }
-    printf("Max network flow is |x| = %d.\n", result);
-
+ 
     CLEAR
 
     return EXIT_SUCCESS;

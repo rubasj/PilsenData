@@ -1,1 +1,2 @@
-valgrind --tool=memcheck -v --leak-check=yes ./flow.exe -s 0 -t 6 -e ./data/example/example_edges.csv -v ./data/example/example_nodes.csv -a -out output.csv
+make
+valgrind --tool=memcheck -v --leak-check=yes ./flow.exe -s 6 -t 0 -e ./data/example/example_edges.csv -v ./data/example/example_nodes.csv -a -out output.csv

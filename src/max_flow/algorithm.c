@@ -15,13 +15,13 @@ int bfs(matrix *rGraph, const int s, const int t, int *parent)
         return 0;
     }
     /* vytvoreni pole prozkoumanych uzlu */
-     visited = (int *)malloc(rGraph->cols * sizeof(int)); /* kontrola alokace**/
+    visited = (int *)malloc(rGraph->cols * sizeof(int)); /* kontrola alokace**/
     if (!visited) {
         printf("BFS: Malloc fault.");
         return -1;
     }
 
-     memset(visited, 0, rGraph->cols * sizeof(int));
+    memset(visited, 0, rGraph->cols * sizeof(int));
 
     /* Vytvoreni fronty, vlozeni zdrojoveho uzlu a oznaceni zdroje jako prozkoumane */
 
@@ -131,9 +131,7 @@ int ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int 
 
 
 
-
-
-    if (out_active == 1) {
+    if (out_active == 1 || max_flow != 0) {
         /* Flow is maximum now, find vertices reachable from s */
 
         dfs(rGraph, s, visited);
