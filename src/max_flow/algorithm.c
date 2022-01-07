@@ -86,9 +86,9 @@ int ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int 
     size_t i, j;
 
 
-    if (!graph || s == -1 || t == -1) {
+    if (!graph || s == -1 || t == -1 || !m_edges || !min_cut) {
         printf("Ford_fulkerson: Missing argument.");
-        return 0;
+        return -1;
     }
 
 
@@ -168,6 +168,10 @@ int ford_fulkerson(const matrix *graph, const matrix *m_edges,int s, int t, int 
 
 void sort_mincut_id(vector_t *data) {
     int i, j, n, min_idx;
+
+    if (!data) {
+        return;
+    }
 
     n = vector_count(data);
 

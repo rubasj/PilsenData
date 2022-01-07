@@ -144,6 +144,9 @@ vector_t *load_vertices(const char *file_name) {
     /* pole vsech uzlu, defaultne nastaveno na "4" prvky, bude se zvetsovat*/
     vector_t *vertices;
 
+    if (!file_name)
+        return NULL;
+
     line = (char *) malloc(LINE_LEN * sizeof(char));
     if (!line) {
         return NULL;
@@ -274,8 +277,7 @@ vector_t *load_edges(const char *file_name, const int switcher) {
     memset(line, 0, LINE_LEN * sizeof(char));
     while (fgets(line, LINE_LEN, fr)) {
 
-
-        /* pokud line obsahuje "id", automaticky se rozumi, ze jde o prvni radku, rovnou se preskoci */
+        /* nejdrive dojde ke kontrole formatu hlavicky a pote se spusti ziskavani hran */
         if (strstr(line, EDGES_HEADER) == NULL) {
             if (switcher == EMPTY_INT &&
             strstr(line, "False" ) != NULL){
